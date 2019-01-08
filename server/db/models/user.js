@@ -49,7 +49,7 @@ const User = db.define('user', {
     defaultValue: false
   },
   phoneNumber: {
-    type: Sequelize.INTEGER
+    type: Sequelize.STRING
   },
   billingAddress: {
     type: Sequelize.STRING
