@@ -6,13 +6,6 @@ const orderHistory = db.define('orderHistory', {
   date: {
     type: Sequelize.DATE
   },
-  games: {
-    type: Sequelize.ARRAY,
-    allowNull: false,
-    validate: {
-      notEmpty: true
-    }
-  },
   totalCost: {
     type: Sequelize.DECIMAL,
     allowNull: false,
