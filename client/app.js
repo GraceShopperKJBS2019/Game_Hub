@@ -1,5 +1,5 @@
 import React from 'react'
-
+import '../../public/style.css'
 import {Navbar} from './components'
 import Routes from './routes'
 
