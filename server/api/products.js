@@ -21,4 +21,27 @@ router.get('/:productID', async (req, res, next) => {
   }
 })
 
+//update
+router.put('/:productID', async (req, res, next) => {
+  try {
+    const productToUpdate = await Product.findOne({
+      where: {
+        id: req.params.productID
+      },
+      include: [{all: true}]
+    })
+    // PROTECT REQ.BODY AFTER COMPONENT IS MADE!!!
+    let newProduct = {}
+    for (let key in productToUpdate) {
+      if (req.body.hasOwnProperty(key)) {
+        newProduct[key] = req.body[key]
+      }
+    }
+    productToUpdate.update(newProduct)
+    res.send(productToUpdate)
+  } catch (error) {
+    next(error)
+  }
+})
+
 module.exports = router
