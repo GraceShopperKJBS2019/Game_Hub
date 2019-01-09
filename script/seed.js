@@ -42,8 +42,7 @@ async function seed() {
   const products = await Promise.all([
     Product.create({
       name: 'Atlas',
-      imageUrl:
-        'https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwjB1-SRmN_fAhUsnOAKHcXxC4wQjRx6BAgBEAU&url=https%3A%2F%2Fstore.steampowered.com%2Fapp%2F834910%2FATLAS%2F&psig=AOvVaw1Z4d6mSy9GSH4guEctz5bs&ust=1547071361145373',
+      imageUrl: 'https://static-cdn.jtvnw.net/ttv-boxart/ATLAS.jpg',
       msrp: 5999,
       currentPrice: 2999,
       console: 'PC',
@@ -54,8 +53,7 @@ async function seed() {
     }),
     Product.create({
       name: 'Grim Dawn',
-      imageUrl:
-        'https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwiru4rMmN_fAhUtTd8KHQ7gCRoQjRx6BAgBEAU&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FGrim_Dawn&psig=AOvVaw3NJIfpK7XXUi4sUnV1CVdS&ust=1547071493522431',
+      imageUrl: 'https://static-cdn.jtvnw.net/ttv-boxart/Grim%20Dawn.jpg',
       msrp: 2999,
       currentPrice: 2499,
       console: 'PC',
@@ -66,8 +64,7 @@ async function seed() {
     }),
     Product.create({
       name: 'Fortnite',
-      imageUrl:
-        'https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwjR573bmd_fAhVvm-AKHcV6AtsQjRx6BAgBEAU&url=https%3A%2F%2Fwww.amazon.com%2FFortnite-Battle-Royale-Gameplay%2Fdp%2FB07CKCQT6C&psig=AOvVaw0JyhdBlBnhEi6Tt1HJdYmT&ust=1547071792434653',
+      imageUrl: 'https://static-cdn.jtvnw.net/ttv-boxart/Fortnite.jpg',
       msrp: 3999,
       currentPrice: 2000,
       console: 'xbox',
@@ -78,8 +75,7 @@ async function seed() {
     }),
     Product.create({
       name: 'Fifa19',
-      imageUrl:
-        'https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwj2orbvmt_fAhWLmuAKHZlnDB4QjRx6BAgBEAU&url=https%3A%2F%2Fwww.walmart.com%2Fip%2FFIFA-19-Electronic-Arts-Xbox-One-014633371666%2F310327315&psig=AOvVaw0TB2vwYZ_v-xmIj1LD9fkS&ust=1547072110623678',
+      imageUrl: 'https://static-cdn.jtvnw.net/ttv-boxart/FIFA%2019.jpg',
       msrp: 5999,
       currentPrice: 2499,
       console: 'xbox',
@@ -90,8 +86,7 @@ async function seed() {
     }),
     Product.create({
       name: 'Mario Cart 8 Deluxe',
-      imageUrl:
-        'https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwivyaHend_fAhVD2oMKHej-DxUQjRx6BAgBEAU&url=https%3A%2F%2Fwww.nintendo.com%2Fgames%2Fdetail%2Fmario-kart-8-deluxe-switch&psig=AOvVaw1cO0U2k-CC-kYrhQElt_ri&ust=1547072879098255',
+      imageUrl: 'https://static-cdn.jtvnw.net/ttv-boxart/Mario%20Kart%208.jpg',
       msrp: 7999,
       currentPrice: 5599,
       console: 'switch',
@@ -103,7 +98,7 @@ async function seed() {
     Product.create({
       name: 'Super Smash Bros Ultimate',
       imageUrl:
-        'https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwjbyZrJn9_fAhUtmuAKHfu6BcoQjRx6BAgBEAU&url=https%3A%2F%2Fwww.ign.com%2Farticles%2F2019%2F01%2F04%2Fsuper-smash-bros-ultimate-dlc-roster-reportedly-leaked&psig=AOvVaw1Dn-BJX4HnGUF5MS0NpPGR&ust=1547073373189648',
+        'https://static-cdn.jtvnw.net/ttv-boxart/Super%20Smash%20Bros.%20Ultimate.jpg',
       msrp: 7999,
       currentPrice: 7999,
       console: 'switch',
@@ -115,7 +110,7 @@ async function seed() {
     Product.create({
       name: 'Call of Duty Black Ops 4',
       imageUrl:
-        'https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwjxnMGEoN_fAhVNMt8KHWczDfwQjRx6BAgBEAU&url=https%3A%2F%2Fwww.bestbuy.com%2Fsite%2Fcall-of-duty-black-ops-4-playstation-4%2F6216332.p%3FskuId%3D6216332&psig=AOvVaw1P4ZLBHaR1KBJ-geYotOc8&ust=1547073497408123',
+        'https://static-cdn.jtvnw.net/ttv-boxart/Call%20of%20Duty%3A%20Black%20Ops%204.jpg',
       msrp: 5999,
       currentPrice: 4499,
       console: 'playstation',
@@ -127,7 +122,7 @@ async function seed() {
     Product.create({
       name: 'Shadow of the Tomb Raider',
       imageUrl:
-        'https://www.google.com/url?sa=i&source=imgres&cd=&ved=2ahUKEwjbpLiQod_fAhUqh-AKHfceCuIQjRx6BAgBEAU&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FShadow_of_the_Tomb_Raider&psig=AOvVaw2QJrbXj5gN0iT7ddXU1S0E&ust=1547073793004334',
+        'https://static-cdn.jtvnw.net/ttv-boxart/Shadow%20of%20the%20Tomb%20Raider.jpg',
       msrp: 5999,
       currentPrice: 3499,
       console: 'playstation',
