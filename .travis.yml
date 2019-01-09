@@ -16,12 +16,12 @@ install:
 before_script:
   - psql -c 'create database "gamehub";' -U postgres # remember to change this name if you change it elsewhere (e.g. package.json)
 
-# before_deploy:
-#   - npm run build-client # make the bundle
-#   - rm -rf node_modules # omit from the tarball, since we skip cleanup
-# deploy:
-#   skip_cleanup: true # prevents travis from deleting the build
-#   provider: heroku
-#   app: YOUR-HEROKU-APP-NAME-HERE # see README
-#   api_key:
-#     secure: YOUR-***ENCRYPTED***-API-KEY-HERE # see README
+before_deploy:
+  - npm run build-client # make the bundle
+  - rm -rf node_modules # omit from the tarball, since we skip cleanup
+deploy:
+  skip_cleanup: true # prevents travis from deleting the build
+  provider: heroku
+  app: game-hub2019 # see README
+  api_key:
+    secure: afdgdUKl53AmRyhc60y1ZfYSUQph/gmkWt9f1cJIZ4PfRZ/IM8DuEZE9Tv33brEoba/nGscQQQKO/wUlpuIsTrncd4/z7PUEOhk7cczopPLR2aegayztso6OJ85n7evY9YNLhzuSVav84N68CcFAlZFmjqGh0y+uY3fJlQ/ZZ3yApi9kpJFQTHHdulNc9oYEGjXtr/7Ys2H2NGRZd+35M6fGjViF8IIS5QsR3GdAKM4ccTwtVlv1gI88VJdPzDME2A1vN66zaTdSrSxNGAhRzhvwPa+XYCheHuTYkW66C+KcgqKeNbF4GcgXrfS9TZXK92xVoyhRRDEFkStsnLpnQI3ekUrmZV2qaKkqurWru7nzZrfhLeIU2RD8os3IxHXyDrfGW81ybKR9kxgDJ+7Dhd6zW0vqBHiJgNEKlFM+7M9YkRp69hQbKYxJk9ZuLVjpw0qmCtgxZ4BqJ6MLLToVjxgeeesdLjjcfpmJqXaMuziZcXe5tIqQ5DaDLI7w02OB8w00rbuCaWaT52vDtJCtP7+zfC1h/eNiZID9y8KrMQSoCU3XP71RUjs76JLgPL92xLqgEsZa8yV+by8s7/nIIZ9Qj2tZiPN5SzAM9d3TNDP+p/Uu6CJNBSwQSJaJ+nlxv0plqCDiElziVkVvPD1NJoK1yfli4739PJgy+/GNScw= # see README
