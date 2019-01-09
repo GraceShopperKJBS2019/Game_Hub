@@ -8,7 +8,7 @@ let dumbProducts = [
     id: 1,
     name: 'Atlas',
     imageUrl:
-      'https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwjB1-SRmN_fAhUsnOAKHcXxC4wQjRx6BAgBEAU&url=https%3A%2F%2Fstore.steampowered.com%2Fapp%2F834910%2FATLAS%2F&psig=AOvVaw1Z4d6mSy9GSH4guEctz5bs&ust=1547071361145373',
+      'https://steamcdn-a.akamaihd.net/steam/apps/834910/header.jpg?t=1546481605',
     msrp: '59.99',
     currentPrice: '29.99',
     console: 'PC',
@@ -72,7 +72,7 @@ let dumbProducts = [
     id: 5,
     name: 'Mario Cart 8 Deluxe',
     imageUrl:
-      'https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwivyaHend_fAhVD2oMKHej-DxUQjRx6BAgBEAU&url=https%3A%2F%2Fwww.nintendo.com%2Fgames%2Fdetail%2Fmario-kart-8-deluxe-switch&psig=AOvVaw1cO0U2k-CC-kYrhQElt_ri&ust=1547072879098255',
+      'https://images-na.ssl-images-amazon.com/images/I/810W2KFm6FL._SY445_.jpg',
     msrp: '79.99',
     currentPrice: '55.99',
     console: 'switch',
@@ -136,21 +136,25 @@ let dumbProducts = [
 
 const AllGames = () => {
   return (
-    <Card.Group>
-      {dumbProducts.map(product => {
-        return (
-          <Card key={product.id}>
-            <Image src={product.imageUrl} />
-            <Card.Content>
-              <div className="product name and price">
-                <Card.Header>{product.name}</Card.Header>
-                <Card.Header>{product.currentPrice}</Card.Header>
-              </div>
-            </Card.Content>
-          </Card>
-        )
-      })}
-    </Card.Group>
+    <Grid padded>
+      <Grid.Row columns={5}>
+        {dumbProducts.map(product => {
+          return (
+            <Grid.Column key={product.id}>
+              <Card style={{width: '200px'}}>
+                <Image height="250px" width="300px" src={product.imageUrl} />
+                <Card.Content>
+                  <div className="product name and price">
+                    <Card.Header>{product.name}</Card.Header>
+                    <Card.Header>{'$' + product.currentPrice}</Card.Header>
+                  </div>
+                </Card.Content>
+              </Card>
+            </Grid.Column>
+          )
+        })}
+      </Grid.Row>
+    </Grid>
   )
 }
 
