@@ -17,11 +17,11 @@ const Product = db.define('product', {
     type: Sequelize.TEXT
   },
   msrp: {
-    type: Sequelize.DECIMAL,
+    type: Sequelize.INTEGER,
     allowNull: false
   },
   currentPrice: {
-    type: Sequelize.DECIMAL
+    type: Sequelize.INTEGER
   },
   console: {
     type: Sequelize.STRING,
