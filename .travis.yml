@@ -1,27 +1,26 @@
 language: node_js
 node_js:
-  - node # uses most recent stable node version
+- node
 services:
-  - postgresql # starts up postgres
+- postgresql
 addons:
-  postgresql: '9.6' # highest available postgres version on Travis
-dist: trusty # uses trusty environment
-sudo: false # when on trusty, uses Docker containers for speed
+  postgresql: '9.6'
+dist: trusty
+sudo: false
 notifications:
   email:
-    on_success: change # default: change (only when going from broken to fixed)
-    on_failure: always # default: always (which is annoying, as it should be)
+    on_success: change
+    on_failure: always
 install:
-  - npm ci # faster, goes only from package-lock
+- npm ci
 before_script:
-  - psql -c 'create database "gamehub";' -U postgres # remember to change this name if you change it elsewhere (e.g. package.json)
-
-# before_deploy:
-#   - npm run build-client # make the bundle
-#   - rm -rf node_modules # omit from the tarball, since we skip cleanup
-# deploy:
-#   skip_cleanup: true # prevents travis from deleting the build
-#   provider: heroku
-#   app: YOUR-HEROKU-APP-NAME-HERE # see README
-#   api_key:
-#     secure: YOUR-***ENCRYPTED***-API-KEY-HERE # see README
+- psql -c 'create database "gamehub";' -U postgres
+before_deploy:
+- npm run build-client
+- rm -rf node_modules
+deploy:
+  skip_cleanup: true
+  provider: heroku
+  app: game-hub2019
+  api_key:
+    secure: uD8zI6/Hjw7zynOok+5ymNmzgF9IN2ZuPRDBTmWiA+sg25B8djvXpGomrfpxGOKz/OMA3y7WkYnlo2RZ6/XU006vtvHtgmGNZDTxvtBkzxJxbTKhAndPNM6lBEJ2NGgkJNW6UM0Qn/3H/xhxkz5P7oW7Sn7o+f13zIYua6yWxnQhGa82fVnw21h8jJop+86dKKHjGhcAgXGAivDoaG8O8+XtIdoEiVC0AhkjwR6hpJrQ2yin0ef53PVwubqCZTJjBY5NFU6EDjJw0vRw49k/BcpFsljc4uiT5FKpw1SzVeF7vxVvKNVV6czuKA1SuhGxM4vvVO+IHK5pthD52RHLOZOICrRs/EAkPE1oRGZ8DRS+7J7JrJeJ9IWKfEmiAvrks01DM78XuQwe88ZgRIO0lcmL0TzguuBzW2oF136/ph7sFiJNOB4kjUQzo7M9E491yvh95o1szu96rwWvT7/zf2dsbjZUi7vvkxIXjb0WeEtQ5zdif7t0lAF/LBGVV0eF8/pUWGBR9zInxle9yUaTVNIrVy3aeN+R8HGQJ2hH9bJdiCQZHv4VV91mUBIT0WF20GV6aNYuzj5+FUEAah5T1KHIA/+6NrdKxr5tdALLmpv3Ls6+mdzu6ekVK8TmENG0neD1+FFtZC83NtipY1w6mOG46mUXoQkykpFDAxvIkUY=
