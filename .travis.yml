@@ -1,27 +1,26 @@
 language: node_js
 node_js:
-  - node # uses most recent stable node version
+- node
 services:
-  - postgresql # starts up postgres
+- postgresql
 addons:
-  postgresql: '9.6' # highest available postgres version on Travis
-dist: trusty # uses trusty environment
-sudo: false # when on trusty, uses Docker containers for speed
+  postgresql: '9.6'
+dist: trusty
+sudo: false
 notifications:
   email:
-    on_success: change # default: change (only when going from broken to fixed)
-    on_failure: always # default: always (which is annoying, as it should be)
+    on_success: change
+    on_failure: always
 install:
-  - npm ci # faster, goes only from package-lock
+- npm ci
 before_script:
-  - psql -c 'create database "gamehub";' -U postgres # remember to change this name if you change it elsewhere (e.g. package.json)
-
+- psql -c 'create database "gamehub";' -U postgres
 before_deploy:
-  - npm run build-client # make the bundle
-  - rm -rf node_modules # omit from the tarball, since we skip cleanup
+- npm run build-client
+- rm -rf node_modules
 deploy:
-  skip_cleanup: true # prevents travis from deleting the build
+  skip_cleanup: true
   provider: heroku
-  app: game-hub2019 # see README
+  app: game-hub2019
   api_key:
-    secure: afdgdUKl53AmRyhc60y1ZfYSUQph/gmkWt9f1cJIZ4PfRZ/IM8DuEZE9Tv33brEoba/nGscQQQKO/wUlpuIsTrncd4/z7PUEOhk7cczopPLR2aegayztso6OJ85n7evY9YNLhzuSVav84N68CcFAlZFmjqGh0y+uY3fJlQ/ZZ3yApi9kpJFQTHHdulNc9oYEGjXtr/7Ys2H2NGRZd+35M6fGjViF8IIS5QsR3GdAKM4ccTwtVlv1gI88VJdPzDME2A1vN66zaTdSrSxNGAhRzhvwPa+XYCheHuTYkW66C+KcgqKeNbF4GcgXrfS9TZXK92xVoyhRRDEFkStsnLpnQI3ekUrmZV2qaKkqurWru7nzZrfhLeIU2RD8os3IxHXyDrfGW81ybKR9kxgDJ+7Dhd6zW0vqBHiJgNEKlFM+7M9YkRp69hQbKYxJk9ZuLVjpw0qmCtgxZ4BqJ6MLLToVjxgeeesdLjjcfpmJqXaMuziZcXe5tIqQ5DaDLI7w02OB8w00rbuCaWaT52vDtJCtP7+zfC1h/eNiZID9y8KrMQSoCU3XP71RUjs76JLgPL92xLqgEsZa8yV+by8s7/nIIZ9Qj2tZiPN5SzAM9d3TNDP+p/Uu6CJNBSwQSJaJ+nlxv0plqCDiElziVkVvPD1NJoK1yfli4739PJgy+/GNScw= # see README
+    secure: uD8zI6/Hjw7zynOok+5ymNmzgF9IN2ZuPRDBTmWiA+sg25B8djvXpGomrfpxGOKz/OMA3y7WkYnlo2RZ6/XU006vtvHtgmGNZDTxvtBkzxJxbTKhAndPNM6lBEJ2NGgkJNW6UM0Qn/3H/xhxkz5P7oW7Sn7o+f13zIYua6yWxnQhGa82fVnw21h8jJop+86dKKHjGhcAgXGAivDoaG8O8+XtIdoEiVC0AhkjwR6hpJrQ2yin0ef53PVwubqCZTJjBY5NFU6EDjJw0vRw49k/BcpFsljc4uiT5FKpw1SzVeF7vxVvKNVV6czuKA1SuhGxM4vvVO+IHK5pthD52RHLOZOICrRs/EAkPE1oRGZ8DRS+7J7JrJeJ9IWKfEmiAvrks01DM78XuQwe88ZgRIO0lcmL0TzguuBzW2oF136/ph7sFiJNOB4kjUQzo7M9E491yvh95o1szu96rwWvT7/zf2dsbjZUi7vvkxIXjb0WeEtQ5zdif7t0lAF/LBGVV0eF8/pUWGBR9zInxle9yUaTVNIrVy3aeN+R8HGQJ2hH9bJdiCQZHv4VV91mUBIT0WF20GV6aNYuzj5+FUEAah5T1KHIA/+6NrdKxr5tdALLmpv3Ls6+mdzu6ekVK8TmENG0neD1+FFtZC83NtipY1w6mOG46mUXoQkykpFDAxvIkUY=
