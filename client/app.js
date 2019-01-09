@@ -1,6 +1,6 @@
 import React from 'react'
-import '../public/style.css'
-import {Navbar} from './components'
+// import '../public/style.css'
+import {Navbar, AllGames} from './components'
 import Routes from './routes'
 import {Navlink, Switch, Route, withRouter} from 'react-router-dom'
 
@@ -11,7 +11,7 @@ const App = () => {
       <Routes />
       <main>
         <Switch>
-          <Route path="/products" component={Allgames} />
+          <Route path="/products" component={AllGames} />
           {/* <Route path = '/products/xbox' component = {Xbox}/> */}
           {/* <Route path = '/products/pc' component = {Pc}/> */}
           {/* <Route path = '/products/playstation' component = {Playstation}/> */}
