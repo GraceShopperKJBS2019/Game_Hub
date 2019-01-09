@@ -2,6 +2,7 @@ const router = require('express').Router()
 const {User} = require('../db/models')
 module.exports = router
 
+// full route /api/users
 router.get('/', async (req, res, next) => {
   try {
     const users = await User.findAll({
@@ -13,5 +14,25 @@ router.get('/', async (req, res, next) => {
     res.json(users)
   } catch (err) {
     next(err)
+  }
+})
+
+// update cart's total price
+router.put('/:id/cart', async (req, res, next) => {
+  try {
+    let updatedCart = await Cart.update(req.body.totalPrice)
+    res.send(updatedCart)
+  } catch (error) {
+    next(error)
+  }
+})
+
+// delete row in cart
+router.delete('/:userId/cart/', async (req, res, next) => {
+  try {
+    const destroyedCart = await Cart.destroy({where: {id: req.params.userId}})
+    res.send(destroyedCart)
+  } catch (error) {
+    next(error)
   }
 })
