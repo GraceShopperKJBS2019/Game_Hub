@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
 import {Menu, Image, Dropdown, Icon, Search} from 'semantic-ui-react'
+import CartModal from './cart'
 
 const Navbar = () => (
   <Menu inverted color="black">
@@ -49,7 +50,7 @@ const Navbar = () => (
       <Search />
     </Menu.Item>
     <Menu.Item>
-      <Icon name="shopping cart" size="large" />
+      <CartModal />
     </Menu.Item>
   </Menu>
 )
