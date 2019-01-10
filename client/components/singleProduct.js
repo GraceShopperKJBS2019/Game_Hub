@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import axios from 'axios'
 import {Image, Item, Dropdown, Button, Icon} from 'semantic-ui-react'
+import {Review} from './reviews'
 
 class singleProduct extends Component {
   constructor() {
@@ -29,6 +30,7 @@ class singleProduct extends Component {
 
   render() {
     const {game} = this.state
+    console.log(game.reviews)
     let price = `$ ${game.currentPrice}`
     price =
       price.slice(0, price.length - 2) + '.' + price.slice(price.length - 2)
@@ -41,41 +43,44 @@ class singleProduct extends Component {
     ]
 
     return (
-      <Item.Group>
-        <Item>
-          <Item.Image
-            size="medium"
-            src="https://static-cdn.jtvnw.net/ttv-boxart/Atlas-285x380.jpg"
-            rounded
-          />
-
-          <Item.Content>
-            <Item.Header>{game.name}</Item.Header>
-
-            <Item.Description>{game.description}</Item.Description>
-
-            <Dropdown
-              placeholder="console"
-              search
-              selection
-              options={consoles}
-              value={this.state.selected}
-              onChange={this.onChangeDropdown.bind(this)}
+      <div>
+        <Item.Group>
+          <Item>
+            <Item.Image
+              size="medium"
+              src="https://static-cdn.jtvnw.net/ttv-boxart/Atlas-285x380.jpg"
+              rounded
             />
 
-            <Item.Meta>
-              <span className="price">{price}</span>
-            </Item.Meta>
+            <Item.Content>
+              <Item.Header>{game.name}</Item.Header>
 
-            <Button animated>
-              <Button.Content hidden>Cart It</Button.Content>
-              <Button.Content visible>
-                <Icon name="shop" />
-              </Button.Content>
-            </Button>
-          </Item.Content>
-        </Item>
-      </Item.Group>
+              <Item.Description>{game.description}</Item.Description>
+
+              <Dropdown
+                placeholder="console"
+                search
+                selection
+                options={consoles}
+                value={this.state.selected}
+                onChange={this.onChangeDropdown.bind(this)}
+              />
+
+              <Item.Meta>
+                <span className="price">{price}</span>
+              </Item.Meta>
+
+              <Button animated>
+                <Button.Content hidden>Cart It</Button.Content>
+                <Button.Content visible>
+                  <Icon name="shop" />
+                </Button.Content>
+              </Button>
+              {game.reviews && <Review review={game.reviews} />}
+            </Item.Content>
+          </Item>
+        </Item.Group>
+      </div>
     )
   }
 }
