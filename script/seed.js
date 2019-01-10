@@ -53,7 +53,8 @@ async function seed() {
     }),
     Product.create({
       name: 'Grim Dawn',
-      imageUrl: 'https://static-cdn.jtvnw.net/ttv-boxart/Grim%20Dawn.jpg',
+      imageUrl:
+        'https://hb.imgix.net/18eda5bccfb1095c66c64d0fdafef3983355ec5e.jpg?auto=compress,format&fit=crop&h=353&w=616&s=795903240797be65dc1617609f66f03a',
       msrp: 2999,
       currentPrice: 2499,
       console: 'PC',

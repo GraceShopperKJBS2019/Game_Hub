@@ -46,11 +46,7 @@ class singleProduct extends Component {
       <div>
         <Item.Group>
           <Item>
-            <Item.Image
-              size="medium"
-              src="https://static-cdn.jtvnw.net/ttv-boxart/Atlas-285x380.jpg"
-              rounded
-            />
+            <Item.Image size="medium" src={game.imageUrl} rounded />
 
             <Item.Content>
               <Item.Header>{game.name}</Item.Header>
