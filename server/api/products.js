@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Product} = require('../db/models/')
+const {Product, Review, User} = require('../db/models/')
 
 // Get all products, full route /api/products
 router.get('/', async (req, res, next) => {
@@ -14,7 +14,17 @@ router.get('/', async (req, res, next) => {
 // Get single product
 router.get('/:productID', async (req, res, next) => {
   try {
-    const singleProduct = await Product.findById(req.params.productID)
+    const singleProduct = await Product.findOne({
+      where: {
+        id: req.params.productID
+      },
+      include: [
+        {
+          model: Review,
+          include: {model: User}
+        }
+      ]
+    })
     res.send(singleProduct)
   } catch (error) {
     next(error)
