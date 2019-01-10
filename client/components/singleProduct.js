@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import axios from 'axios'
-import {Image, Item, Dropdown} from 'semantic-ui-react'
+import {Image, Item, Dropdown, Button, Icon} from 'semantic-ui-react'
 
 class singleProduct extends Component {
   constructor() {
@@ -51,7 +51,9 @@ class singleProduct extends Component {
 
           <Item.Content>
             <Item.Header>{game.name}</Item.Header>
+
             <Item.Description>{game.description}</Item.Description>
+
             <Dropdown
               placeholder="console"
               search
@@ -60,9 +62,17 @@ class singleProduct extends Component {
               value={this.state.selected}
               onChange={this.onChangeDropdown.bind(this)}
             />
+
             <Item.Meta>
               <span className="price">{price}</span>
             </Item.Meta>
+
+            <Button animated>
+              <Button.Content hidden>Cart It</Button.Content>
+              <Button.Content visible>
+                <Icon name="shop" />
+              </Button.Content>
+            </Button>
           </Item.Content>
         </Item>
       </Item.Group>
