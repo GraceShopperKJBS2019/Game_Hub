@@ -27,7 +27,7 @@ class App extends Component {
         <Routes />
         <main>
           <Switch>
-            <Route path="/products" component={AllGames} />
+            <Route exact path="/products" component={AllGames} />
             <Route path="/products/xbox" component={AllXboxGames} />
             <Route path="/products/pc" component={AllPcGames} />
             <Route path="/products/playstation" component={AllPlaystayGames} />
