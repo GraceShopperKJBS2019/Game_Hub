@@ -3,8 +3,10 @@ import {connect} from 'react-redux'
 import {NavLink} from 'react-router-dom'
 import {Card, Image, Grid} from 'semantic-ui-react'
 
+
 const AllPcGames = props => {
   const products = props.products.filter(product => product.console === 'PC')
+
   return (
     <Grid padded>
       <Grid.Row columns={5}>

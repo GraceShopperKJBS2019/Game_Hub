@@ -15,7 +15,12 @@ const AllGames = props => {
                 <Card.Content>
                   <div className="product name and price">
                     <Card.Header>{product.name}</Card.Header>
-                    <Card.Header>{'$' + product.currentPrice}</Card.Header>
+                    <Card.Header>
+                      {'$' +
+                        product.currentPrice.toString().slice(0, -2) +
+                        '.' +
+                        product.currentPrice.toString().slice(-2)}
+                    </Card.Header>
                   </div>
                 </Card.Content>
               </Card>
