@@ -4,11 +4,12 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
 import {Menu, Image, Dropdown, Icon, Search} from 'semantic-ui-react'
+import logo from '../../public/icon.png'
 
 const Navbar = () => (
   <Menu inverted color="black">
     <Menu.Item as={Link} to="/">
-      <Image circular size="tiny" centered src="icon.png" />
+      <Image circular size="tiny" centered src={logo} />
     </Menu.Item>
     <Menu.Item>
       <Dropdown text="Platforms" button color="black">
