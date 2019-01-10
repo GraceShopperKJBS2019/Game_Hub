@@ -16,10 +16,30 @@ const Navbar = () => (
           <Dropdown.Item as={Link} to="/products">
             All platforms
           </Dropdown.Item>
-          <Dropdown.Item icon="computer" text="PC" />
-          <Dropdown.Item icon="xbox" text="Xbox" />
-          <Dropdown.Item icon="playstation" text="Playstation" />
-          <Dropdown.Item icon="nintendo switch" text="Switch" />
+          <Dropdown.Item
+            as={Link}
+            to="/products/pc"
+            icon="computer"
+            text="PC"
+          />
+          <Dropdown.Item
+            as={Link}
+            to="/products/xbox"
+            icon="xbox"
+            text="Xbox"
+          />
+          <Dropdown.Item
+            as={Link}
+            to="/products/playstation"
+            icon="playstation"
+            text="Playstation"
+          />
+          <Dropdown.Item
+            as={Link}
+            to="/products/switch"
+            icon="nintendo switch"
+            text="Switch"
+          />
         </Dropdown.Menu>
       </Dropdown>
     </Menu.Item>
