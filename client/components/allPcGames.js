@@ -6,7 +6,7 @@ import {Card, Image, Grid} from 'semantic-ui-react'
 let dumbProducts = [
   {
     id: 1,
-    name: 'Atlas',
+    name: 'Atkajagljkhaghaghglas',
     imageUrl:
       'https://steamcdn-a.akamaihd.net/steam/apps/834910/header.jpg?t=1546481605',
     msrp: '59.99',
