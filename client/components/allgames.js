@@ -11,7 +11,12 @@ const AllGames = props => {
           return (
             <Grid.Column key={product.id}>
               <Card style={{width: '200px'}}>
-                <Image height="250px" width="300px" src={product.imageUrl} />
+                <Image
+                  height="250px"
+                  width="300px"
+                  src={product.imageUrl}
+                  href={'./products/' + product.id}
+                />
                 <Card.Content>
                   <div className="product name and price">
                     <Card.Header>{product.name}</Card.Header>
