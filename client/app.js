@@ -8,7 +8,8 @@ import {
   AllPcGames,
   AllXboxGames,
   AllPlaystayGames,
-  AllSwitchGames
+  AllSwitchGames,
+  UserHome
 } from './components'
 import Routes from './routes'
 import {Navlink, Switch, Route, withRouter} from 'react-router-dom'
@@ -28,6 +29,7 @@ class App extends Component {
         <main>
           <Switch>
             <Route exact path="/" component={Slider} />
+            <Route path="/home" component={UserHome} />
             <Route exact path="/products" component={AllGames} />
             <Route path="/products/xbox" component={AllXboxGames} />
             <Route path="/products/pc" component={AllPcGames} />
