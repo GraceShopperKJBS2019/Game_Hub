@@ -1,5 +1,15 @@
 import React from 'react'
-import {Button, Modal, Header, Item, Icon, Divider} from 'semantic-ui-react'
+import {
+  Button,
+  Modal,
+  Header,
+  Item,
+  Icon,
+  Divider,
+  Segment,
+  Form
+} from 'semantic-ui-react'
+import CheckoutModal from './checkout'
 
 let dumbProducts = [
   {
@@ -119,6 +129,14 @@ const CartModal = () => {
             </span>
           </Item>
         </Item.Group>
+        <Segment color="black" inverted />
+        <Form>
+          <Form.Field width="four">
+            <label>Email</label>
+            <input placeholder="Enter Email" />
+          </Form.Field>
+        </Form>
+        <CheckoutModal />
       </Modal.Content>
     </Modal>
   )
