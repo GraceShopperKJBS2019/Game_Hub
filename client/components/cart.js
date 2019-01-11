@@ -13,6 +13,7 @@ import {
 import CheckoutModal from './checkout'
 
 const CartModal = props => {
+  console.log(props)
   let {cart} = props
   let pricesArr = cart.map(elem => {
     return elem.currentPrice
