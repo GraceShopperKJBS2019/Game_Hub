@@ -4,7 +4,7 @@ import {Comment, Icon} from 'semantic-ui-react'
 export const Review = props => (
   <Comment.Group>
     {props.review.map(rev => (
-      <Comment key={rev.key}>
+      <Comment key={rev.id}>
         <Comment.Avatar
           as="a"
           src="https://banner2.kisspng.com/20180403/qtw/kisspng-computer-icons-avatar-woman-user-avatar-5ac3a1dfb11ca9.9792609515227703997255.jpg"
