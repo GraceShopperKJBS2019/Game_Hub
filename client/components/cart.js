@@ -1,4 +1,5 @@
 import React from 'react'
+import {connect} from 'react-redux'
 import {
   Button,
   Modal,
@@ -11,44 +12,12 @@ import {
 } from 'semantic-ui-react'
 import CheckoutModal from './checkout'
 
-let dumbProducts = [
-  {
-    id: 1,
-    name: 'Atlas',
-    imageUrl: 'https://static-cdn.jtvnw.net/ttv-boxart/ATLAS.jpg',
-    msrp: 5999,
-    currentPrice: 2999,
-    console: 'PC',
-    description:
-      'ATLAS: The ultimate survival MMO of unprecedented scale with 40,000+ simultaneous players in the same world. Join an endless adventure of piracy & sailing, exploration & combat, roleplaying & progression, settlement & civilization-building, in one of the largest game worlds ever! Explore, Build, Conquer!',
-    inventory: 100,
-    releaseDate: '2018-12-19T00:00:00.000Z',
-    createdAt: '2019-01-09T02:37:45.307Z',
-    updatedAt: '2019-01-09T02:37:45.307Z',
-    cartId: null
-  },
-  {
-    id: 2,
-    name: 'Grim Dawn',
-    imageUrl: 'https://static-cdn.jtvnw.net/ttv-boxart/Grim%20Dawn.jpg',
-    msrp: 2999,
-    currentPrice: 2499,
-    console: 'PC',
-    description:
-      'Enter an apocalyptic fantasy world where humanity is on the brink of extinction, iron is valued above gold and trust is hard earned. This ARPG features complex character development, hundreds of unique items, crafting and quests with choice & consequence.',
-    inventory: 100,
-    releaseDate: '2012-11-20T00:00:00.000Z',
-    createdAt: '2019-01-09T02:37:45.308Z',
-    updatedAt: '2019-01-09T02:37:45.308Z',
-    cartId: null
-  }
-]
-
-const CartModal = () => {
-  let pricesArr = dumbProducts.map(elem => {
+const CartModal = props => {
+  let {cart} = props
+  let pricesArr = cart.map(elem => {
     return elem.currentPrice
   })
-  console.log('-----', pricesArr)
+
   return (
     <Modal
       trigger={
@@ -60,14 +29,11 @@ const CartModal = () => {
       <Header icon="shopping cart" content="Shopping Cart" />
       <Modal.Content>
         <Item.Group divided>
-          {dumbProducts.map(product => {
+          {cart.map(product => {
             if (product.inventory && product.price === product.msrp) {
               return (
                 <Item key={product.id}>
-                  <Item.Image
-                    size="tiny"
-                    src="https://static-cdn.jtvnw.net/ttv-boxart/ATLAS.jpg"
-                  />
+                  <Item.Image size="tiny" src={product.imageUrl} />
                   <Item.Content verticalAlign="middle">
                     <Item.Header>{product.name}</Item.Header>
                     <Item.Meta>
@@ -79,10 +45,7 @@ const CartModal = () => {
             } else {
               return (
                 <Item key={product.id}>
-                  <Item.Image
-                    size="tiny"
-                    src="https://static-cdn.jtvnw.net/ttv-boxart/ATLAS.jpg"
-                  />
+                  <Item.Image size="tiny" src={product.imageUrl} />
                   <Item.Content verticalAlign="middle">
                     <Item.Header>{product.name}</Item.Header>
                     <Item.Meta>
@@ -142,4 +105,10 @@ const CartModal = () => {
   )
 }
 
-export default CartModal
+const mapStateToProps = state => {
+  return {
+    cart: state.cart
+  }
+}
+
+export default connect(mapStateToProps)(CartModal)
