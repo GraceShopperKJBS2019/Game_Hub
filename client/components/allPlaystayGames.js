@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {NavLink} from 'react-router-dom'
 import {Card, Image, Grid, Button, Icon} from 'semantic-ui-react'
+import AddToCartButton from './addToCartButton'
 
 const AllPlaystayGames = props => {
   let products = props.products.filter(
@@ -30,12 +31,7 @@ const AllPlaystayGames = props => {
                           product.currentPrice.toString().slice(0, -2) +
                           '.' +
                           product.currentPrice.toString().slice(-2)}
-                        <Button animated>
-                          <Button.Content hidden>Cart It</Button.Content>
-                          <Button.Content visible>
-                            <Icon name="shop" />
-                          </Button.Content>
-                        </Button>
+                        <AddToCartButton product={product} />
                       </Card.Header>{' '}
                     </div>
                   </Card.Content>

@@ -5,6 +5,7 @@ import {Image, Item, Dropdown, Button, Icon} from 'semantic-ui-react'
 import {Review} from './reviews'
 import {game} from '../store/singleProduct'
 import {setConsole} from '../store/currConsole'
+import AddToCartButton from './addToCartButton'
 
 class singleProduct extends Component {
   componentDidMount() {
@@ -49,12 +50,8 @@ class singleProduct extends Component {
                 <span className="price">{singleProduct.price}</span>
               </Item.Meta>
 
-              <Button animated>
-                <Button.Content hidden>Cart It</Button.Content>
-                <Button.Content visible>
-                  <Icon name="shop" />
-                </Button.Content>
-              </Button>
+              <AddToCartButton product={singleProduct} />
+
               {singleProduct.reviews && (
                 <Review review={singleProduct.reviews} />
               )}
