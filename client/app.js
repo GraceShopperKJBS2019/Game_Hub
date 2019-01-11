@@ -14,10 +14,12 @@ import Routes from './routes'
 import {Navlink, Switch, Route, withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {games} from './store/products'
+import {getCart} from './store/cart'
 
 class App extends Component {
   componentDidMount() {
     this.props.getProducts()
+    this.props.getCart(1)
   }
 
   render() {
@@ -43,7 +45,8 @@ class App extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getProducts: () => dispatch(games())
+    getProducts: () => dispatch(games()),
+    getCart: id => dispatch(getCart(id))
   }
 }
 
