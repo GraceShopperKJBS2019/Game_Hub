@@ -52,7 +52,10 @@ export default class Slider extends React.Component {
 
   render() {
     return (
-      <div className="slider">
+      <div
+        className="slider"
+        style={{overflow: 'hidden', whiteSpace: 'nowrap'}}
+      >
         <div
           className="slider-wrapper"
           style={{

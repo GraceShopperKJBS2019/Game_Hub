@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-// import '../public/style.css'
 
 import {
   Slider,

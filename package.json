@@ -40,6 +40,7 @@
     "axios": "^0.15.3",
     "compression": "^1.7.3",
     "connect-session-sequelize": "^4.1.0",
+    "css-loader": "^2.1.0",
     "express": "^4.16.3",
     "express-session": "^1.15.1",
     "file-loader": "^3.0.1",
@@ -59,7 +60,8 @@
     "redux-thunk": "^2.3.0",
     "semantic-ui-react": "^0.84.0",
     "sequelize": "^4.38.0",
-    "socket.io": "^2.1.1"
+    "socket.io": "^2.1.1",
+    "style-loader": "^0.23.1"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.55",
