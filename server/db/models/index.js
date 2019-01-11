@@ -15,14 +15,20 @@ const Review = require('./reviews')
 OrderHistory.belongsTo(User)
 User.hasMany(OrderHistory)
 
-User.hasOne(Cart)
-Cart.hasMany(Product)
+// User.hasOne(Cart)
+// Cart.hasMany(Product)
 
 User.hasMany(Review)
 Review.belongsTo(User)
 
 Product.hasMany(Review)
 Review.belongsTo(Product)
+
+User.hasMany(Cart)
+Cart.belongsTo(User)
+
+Product.hasMany(Cart)
+Cart.belongsTo(Product)
 
 /**
  * We'll export all of our models here, so that any time a module needs a model,
@@ -34,5 +40,6 @@ module.exports = {
   User,
   Product,
   OrderHistory,
-  Review
+  Review,
+  Cart
 }
