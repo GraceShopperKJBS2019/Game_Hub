@@ -3,37 +3,20 @@ import {connect} from 'react-redux'
 import axios from 'axios'
 import {Image, Item, Dropdown, Button, Icon} from 'semantic-ui-react'
 import {Review} from './reviews'
+import {game} from '../store/singleProduct'
+import {setConsole} from '../store/currConsole'
 
 class singleProduct extends Component {
-  constructor() {
-    super()
-    this.state = {
-      game: {},
-      selected: ''
-    }
-  }
-
-  async componentDidMount() {
-    const singleGame = await axios.get(
-      `/api/products/${this.props.match.params.id}`
-    )
-    this.setState(() => {
-      return {
-        game: singleGame.data
-      }
-    })
+  componentDidMount() {
+    this.props.getProduct(this.props.match.params.id)
   }
 
   onChangeDropdown(event, data) {
-    this.setState({selected: data.value})
+    this.props.setConsole(data.value)
   }
 
   render() {
-    const {game} = this.state
-    console.log(game.reviews)
-    let price = `$ ${game.currentPrice}`
-    price =
-      price.slice(0, price.length - 2) + '.' + price.slice(price.length - 2)
+    const {singleProduct} = this.props
 
     const consoles = [
       {key: 'PC', text: 'PC', value: 'PC'},
@@ -46,24 +29,24 @@ class singleProduct extends Component {
       <div>
         <Item.Group>
           <Item>
-            <Item.Image size="medium" src={game.imageUrl} rounded />
+            <Item.Image size="medium" src={singleProduct.imageUrl} rounded />
 
             <Item.Content>
-              <Item.Header>{game.name}</Item.Header>
+              <Item.Header>{singleProduct.name}</Item.Header>
 
-              <Item.Description>{game.description}</Item.Description>
+              <Item.Description>{singleProduct.description}</Item.Description>
 
               <Dropdown
                 placeholder="console"
                 search
                 selection
                 options={consoles}
-                value={this.state.selected}
+                value={this.props.console}
                 onChange={this.onChangeDropdown.bind(this)}
               />
 
               <Item.Meta>
-                <span className="price">{price}</span>
+                <span className="price">{singleProduct.price}</span>
               </Item.Meta>
 
               <Button animated>
@@ -72,7 +55,9 @@ class singleProduct extends Component {
                   <Icon name="shop" />
                 </Button.Content>
               </Button>
-              {game.reviews && <Review review={game.reviews} />}
+              {singleProduct.reviews && (
+                <Review review={singleProduct.reviews} />
+              )}
             </Item.Content>
           </Item>
         </Item.Group>
@@ -81,4 +66,18 @@ class singleProduct extends Component {
   }
 }
 
-export default singleProduct
+const mapStateToProps = state => {
+  return {
+    singleProduct: state.singleProduct,
+    console: state.console
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getProduct: id => dispatch(game(id)),
+    setConsole: cons => dispatch(setConsole(cons))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(singleProduct)
