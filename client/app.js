@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
-// import '../public/style.css'
 
 import {
+  Slider,
   Navbar,
   AllGames,
   singleProduct,
@@ -27,6 +27,7 @@ class App extends Component {
         <Routes />
         <main>
           <Switch>
+            <Route exact path="/" component={Slider} />
             <Route exact path="/products" component={AllGames} />
             <Route path="/products/xbox" component={AllXboxGames} />
             <Route path="/products/pc" component={AllPcGames} />
