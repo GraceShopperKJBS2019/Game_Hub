@@ -6,6 +6,7 @@ import {runInNewContext} from 'vm'
 const GOT_CART = 'GOT_CART'
 const ADD_TO_CART = 'ADD_TO_CART'
 const FINISH_ORDER = 'FINISH_ORDER'
+const DELETE_FROM_CART = 'DELETE_FROM_CART'
 
 //INITIAL STATE
 const defaultCart = []
@@ -26,6 +27,12 @@ const gotCart = cart => {
 const finishedOrder = () => {
   return {
     type: FINISH_ORDER
+  }
+}
+const deleteFromCart = cartItem => {
+  return {
+    type: DELETE_FROM_CART,
+    cartItem
   }
 }
 
@@ -59,17 +66,18 @@ export const cartAdder = productToAdd => {
   }
 }
 
-export const finishOrder = orderId => {
+export const deleteFromCartThunk = cartId => {
   return async dispatch => {
     try {
-      //axios post to order histories here
-      // await axois.put(`/api/ordertransactions/${orderId}`)
-      dispatch(finishedOrder())
+      const gameToRemove = await axios.delete(`/api/users/cart/${cartId}`)
+      const action = deleteFromCart(gameToRemove.data)
+      dispatch(action)
     } catch (error) {
       console.log(error)
     }
   }
 }
+
 //REDUCER
 
 export default function(state = defaultCart, action) {
@@ -80,6 +88,8 @@ export default function(state = defaultCart, action) {
       return [...state, action.productToAdd]
     case FINISH_ORDER:
       return []
+    case DELETE_FROM_CART:
+      return state.filter(item => item.id !== action.cartItem.id)
     default:
       return state
   }
