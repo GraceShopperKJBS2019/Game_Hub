@@ -14,7 +14,7 @@ import CheckoutModal from './checkout'
 
 const priceHelper = price => {
   let ret = `$${price}`
-  return `$${ret.slice(0, ret.length - 2) + '.' + ret.slice(ret.length - 2)}`
+  return `${ret.slice(0, ret.length - 2) + '.' + ret.slice(ret.length - 2)}`
 }
 
 const CartModal = props => {
@@ -36,7 +36,7 @@ const CartModal = props => {
       <Modal.Content>
         <Item.Group divided>
           {cart.map(cartItem => {
-            const {product} = cartItem
+            const product = cartItem
             total += product.currentPrice
             if (product.inventory && product.currentPrice === product.msrp) {
               return (
