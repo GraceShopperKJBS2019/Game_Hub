@@ -1,4 +1,5 @@
 import React from 'react'
+import {finishOrder} from '../store/cart'
 import {
   Button,
   Modal,
@@ -10,11 +11,14 @@ import {
   Segment,
   Sidebar
 } from 'semantic-ui-react'
-import {Finalcheckout} from './finalcheckout'
+
+import {connect} from 'react-redux'
 class CheckoutModal extends React.Component {
   constructor() {
     super()
     this.state = {
+      showModal: false,
+      transactions: [],
       visible: false,
       animation: 'overlay',
       name: '',
@@ -24,17 +28,37 @@ class CheckoutModal extends React.Component {
       zipcode: ''
     }
     this.handleClick = this.handleClick.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.closeModal = this.closeModal.bind(this)
   }
 
   handleClick() {
     this.setState({visible: true})
   }
+
+  handleSubmit(event) {
+    console.log('event', event)
+    event.preventDefault()
+    this.closeModal()
+    this.props.finishOrder()
+    this.setState({
+      transactions: this.props.cart
+    })
+  }
+
+  closeModal() {
+    this.setState({showModal: false})
+  }
   render() {
-    const {visible} = this.state
+    const {visible, showModal} = this.state
+    console.log('props', this.props)
+    console.log('transactions', this.state.transactions)
     return (
       <Modal
+        onClose={this.closeModal}
+        open={showModal}
         trigger={
-          <Button color="blue">
+          <Button onClick={() => this.setState({showModal: true})} color="blue">
             <Icon name="credit card outline" size="large" /> Pay with credit
             card
           </Button>
@@ -64,7 +88,9 @@ class CheckoutModal extends React.Component {
                     <label>Card Code</label>
                     <input placeholder="CardCode" />
                   </Form.Field>
-                  <Button>Submit</Button>
+                  <Button onClick={event => this.handleSubmit(event)}>
+                    Submit
+                  </Button>
                 </Form>
               </Segment>
             </Sidebar>
@@ -105,4 +131,13 @@ class CheckoutModal extends React.Component {
   }
 }
 
-export default CheckoutModal
+const mapStateToProps = state => {
+  return {
+    cart: state.cart
+  }
+}
+
+const mapDispatchToProps = dispatch => ({
+  finishOrder: () => dispatch(finishOrder())
+})
+export default connect(mapStateToProps, mapDispatchToProps)(CheckoutModal)
