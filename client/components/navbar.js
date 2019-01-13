@@ -3,10 +3,10 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
-import {Menu, Image, Dropdown, Icon, Search} from 'semantic-ui-react'
+import {Menu, Image, Dropdown, Icon, Search, Button} from 'semantic-ui-react'
 import CartModal from './cart'
 
-const Navbar = () => (
+const Navbar = props => (
   <Menu inverted color="black">
     <Menu.Item as={Link} to="/">
       <Image circular size="tiny" centered src="icon.png" />
@@ -51,6 +51,9 @@ const Navbar = () => (
     </Menu.Item>
     <Menu.Item>
       <CartModal />
+    </Menu.Item>
+    <Menu.Item>
+      {props.isLoggedIn && <Button onClick={props.handleClick}>Logout</Button>}
     </Menu.Item>
   </Menu>
 )
