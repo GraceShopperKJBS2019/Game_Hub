@@ -4,6 +4,7 @@ import products from './products'
 //ACTION TYPES
 const GOT_CART = 'GOT_CART'
 const ADD_TO_CART = 'ADD_TO_CART'
+const FINISH_ORDER = 'FINISH_ORDER'
 
 //INITIAL STATE
 const defaultCart = []
@@ -22,6 +23,11 @@ const gotCart = cart => {
   }
 }
 
+const finishedOrder = () => {
+  return {
+    type: FINISH_ORDER
+  }
+}
 // THUNK CREATORS
 export const cartAdder = productToAdd => {
   return dispatch => {
@@ -43,6 +49,17 @@ export const getCart = id => {
   }
 }
 
+export const finishOrder = orderId => {
+  return async dispatch => {
+    try {
+      //axios post to order histories here
+      // await axois.put(`/api/ordertransactions/${orderId}`)
+      dispatch(finishedOrder())
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
 //REDUCER
 
 export default function(state = defaultCart, action) {
@@ -51,6 +68,8 @@ export default function(state = defaultCart, action) {
       return action.userCart
     case ADD_TO_CART:
       return [...state, action.productToAdd]
+    case FINISH_ORDER:
+      return []
     default:
       return state
   }
