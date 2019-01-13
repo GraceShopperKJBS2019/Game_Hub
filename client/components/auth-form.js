@@ -18,8 +18,18 @@ const AuthForm = props => {
     <Container>
       <Form unstackable onSubmit={handleSubmit} name={name}>
         <Form.Group inline>
-          <Form.Input label="email" placeholder="email" type="text" />
-          <Form.Input label="password" placeholder="password" type="password" />
+          <Form.Input
+            label="email"
+            name="email"
+            placeholder="email"
+            type="text"
+          />
+          <Form.Input
+            label="password"
+            name="password"
+            placeholder="password"
+            type="password"
+          />
           <Form.Button type="submit">{displayName}</Form.Button>
           {error && error.response && <div> {error.response.data} </div>}
           <GoogleLogin
