@@ -12,11 +12,17 @@ import {
 } from 'semantic-ui-react'
 import CheckoutModal from './checkout'
 
+const priceHelper = price => {
+  let ret = `$${price}`
+  return `$${ret.slice(0, ret.length - 2) + '.' + ret.slice(ret.length - 2)}`
+}
+
 const CartModal = props => {
-  let {cart} = props
-  let pricesArr = cart.map(elem => {
-    return elem.currentPrice
-  })
+  const {cart} = props
+  // let pricesArr = cart.map(elem => {
+  //   return elem.currentPrice
+  // })
+  let total = 0
 
   return (
     <Modal
@@ -29,10 +35,12 @@ const CartModal = props => {
       <Header icon="shopping cart" content="Shopping Cart" />
       <Modal.Content>
         <Item.Group divided>
-          {cart.map(product => {
-            if (product.inventory && product.price === product.msrp) {
+          {cart.map(cartItem => {
+            const {product} = cartItem
+            total += product.currentPrice
+            if (product.inventory && product.currentPrice === product.msrp) {
               return (
-                <Item key={product.id}>
+                <Item key={cartItem.id}>
                   <Item.Image size="tiny" src={product.imageUrl} />
                   <Item.Content verticalAlign="middle">
                     <Item.Header>{product.name}</Item.Header>
@@ -44,25 +52,13 @@ const CartModal = props => {
               )
             } else {
               return (
-                <Item key={product.id}>
+                <Item key={cartItem.id}>
                   <Item.Image size="tiny" src={product.imageUrl} />
                   <Item.Content verticalAlign="middle">
                     <Item.Header>{product.name}</Item.Header>
                     <Item.Meta>
-                      <strike>
-                        {' '}
-                        {'$' +
-                          product.msrp.toString().slice(0, -2) +
-                          '.' +
-                          product.msrp.toString().slice(-2)}
-                      </strike>
-                      <span>
-                        {' '}
-                        {'$' +
-                          product.currentPrice.toString().slice(0, -2) +
-                          '.' +
-                          product.currentPrice.toString().slice(-2)}
-                      </span>
+                      <strike> {priceHelper(product.msrp)}</strike>
+                      <span> {priceHelper(product.currentPrice)}</span>
                     </Item.Meta>
                   </Item.Content>
                 </Item>
@@ -73,8 +69,8 @@ const CartModal = props => {
         <Divider />
         <Item.Group>
           <Item>
-            <Item.Header>Total:</Item.Header>
-            <span>
+            <Item.Header>Total: {priceHelper(total)}</Item.Header>
+            {/* <span>
               {'$' +
                 pricesArr
                   .reduce((accumulator, currentValue, currentIndex, array) => {
@@ -89,7 +85,7 @@ const CartModal = props => {
                   }, 0)
                   .toString()
                   .slice(-2)}
-            </span>
+            </span> */}
           </Item>
         </Item.Group>
         <Segment color="black" inverted />

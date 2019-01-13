@@ -2,7 +2,7 @@ import axios from 'axios'
 import products from './products'
 
 //ACTION TYPES
-const GET_CART = 'GET_CART'
+const GOT_CART = 'GOT_CART'
 const ADD_TO_CART = 'ADD_TO_CART'
 
 //INITIAL STATE
@@ -15,7 +15,14 @@ export const addToCart = productToAdd => {
   return {type: ADD_TO_CART, productToAdd}
 }
 
-//THUNK CREATORS
+const gotCart = cart => {
+  return {
+    type: GOT_CART,
+    userCart: cart
+  }
+}
+
+// THUNK CREATORS
 export const cartAdder = productToAdd => {
   return dispatch => {
     const productAdded = addToCart(productToAdd)
@@ -23,11 +30,25 @@ export const cartAdder = productToAdd => {
   }
 }
 
+export const getCart = id => {
+  return async dispatch => {
+    try {
+      console.log('CURRENTLY USING DUMMY ID 1, LOOK AT app.js')
+      let userCart = await axios.get(`/api/users/${id}/cart`)
+      const action = gotCart(userCart.data)
+      dispatch(action)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
 //REDUCER
 
 export default function(state = defaultCart, action) {
-  console.log('action:', action)
   switch (action.type) {
+    case GOT_CART:
+      return action.userCart
     case ADD_TO_CART:
       return [...state, action.productToAdd]
     default:
