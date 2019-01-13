@@ -5,7 +5,7 @@ import {cartAdder} from '../store/cart'
 
 const AddToCartButton = props => {
   return (
-    <Button animated onClick={() => props.addToCart(props.product)}>
+    <Button animated onClick={() => props.add(props.product)}>
       <Button.Content hidden>Cart It</Button.Content>
       <Button.Content visible>
         <Icon name="shop" />
@@ -16,8 +16,7 @@ const AddToCartButton = props => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    addToCart: product => {
-      console.log('product:', product)
+    add: product => {
       dispatch(cartAdder(product))
     }
   }

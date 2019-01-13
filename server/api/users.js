@@ -19,7 +19,6 @@ router.get('/', async (req, res, next) => {
 //
 router.get('/:userId/cart', async (req, res, next) => {
   try {
-    // hit db for
     const cartItems = await Cart.findAll({
       where: {
         userId: req.params.userId
@@ -31,6 +30,18 @@ router.get('/:userId/cart', async (req, res, next) => {
       ]
     })
     res.send(cartItems)
+  } catch (error) {
+    next(error)
+  }
+})
+
+router.post('/:userId/cart', async (req, res, next) => {
+  try {
+    const itemToBeAdded = await Cart.create({
+      productId: req.body.id,
+      userId: req.params.userId
+    })
+    res.send(itemToBeAdded)
   } catch (error) {
     next(error)
   }
