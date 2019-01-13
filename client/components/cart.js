@@ -36,16 +36,16 @@ const CartModal = props => {
       <Modal.Content>
         <Item.Group divided>
           {cart.map(cartItem => {
-            const product = cartItem
+            const {product} = cartItem
             total += product.currentPrice
             if (product.inventory && product.currentPrice === product.msrp) {
               return (
-                <Item key={cartItem.id}>
+                <Item key={cartItem.Id}>
                   <Item.Image size="tiny" src={product.imageUrl} />
                   <Item.Content verticalAlign="middle">
                     <Item.Header>{product.name}</Item.Header>
                     <Item.Meta>
-                      <span>{product.currentPrice}</span>
+                      <span>{priceHelper(product.currentPrice)}</span>
                     </Item.Meta>
                   </Item.Content>
                 </Item>
