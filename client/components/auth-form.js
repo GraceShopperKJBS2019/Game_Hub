@@ -3,9 +3,14 @@ import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {auth} from '../store'
 import {Form, Container} from 'semantic-ui-react'
+import {GoogleLogin} from 'react-google-login'
 /**
  * COMPONENT
  */
+const responseGoogle = response => {
+  console.log(response)
+}
+
 const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
 
@@ -17,9 +22,13 @@ const AuthForm = props => {
           <Form.Input label="password" placeholder="password" type="password" />
           <Form.Button type="submit">{displayName}</Form.Button>
           {error && error.response && <div> {error.response.data} </div>}
+          <GoogleLogin
+            buttonText="Login"
+            onSuccess={responseGoogle}
+            onFailure={responseGoogle}
+          />
         </Form.Group>
       </Form>
-      <a href="/auth/google">{displayName} with Google</a>
     </Container>
   )
 }
