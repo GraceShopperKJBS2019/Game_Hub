@@ -11,6 +11,7 @@ import {
   Form
 } from 'semantic-ui-react'
 import CheckoutModal from './checkout'
+import RemoveFromCartButton from './removeFromCartButton'
 
 const priceHelper = price => {
   let ret = `$${price}`
@@ -46,6 +47,9 @@ const CartModal = props => {
                     <Item.Header>{product.name}</Item.Header>
                     <Item.Meta>
                       <span>{priceHelper(product.currentPrice)}</span>
+                      <span>
+                        <RemoveFromCartButton cart={cartItem} />
+                      </span>
                     </Item.Meta>
                   </Item.Content>
                 </Item>
@@ -59,6 +63,9 @@ const CartModal = props => {
                     <Item.Meta>
                       <strike> {priceHelper(product.msrp)}</strike>
                       <span> {priceHelper(product.currentPrice)}</span>
+                      <span>
+                        <RemoveFromCartButton cart={cartItem} />
+                      </span>
                     </Item.Meta>
                   </Item.Content>
                 </Item>
