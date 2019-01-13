@@ -17,12 +17,12 @@ export const addToCart = productToAdd => {
 
 const gotCart = cart => {
   return {
-    action: GOT_CART,
-    cart
+    type: GOT_CART,
+    userCart: cart
   }
 }
 
-//THUNK CREATORS
+// THUNK CREATORS
 export const cartAdder = productToAdd => {
   return dispatch => {
     const productAdded = addToCart(productToAdd)
@@ -31,12 +31,12 @@ export const cartAdder = productToAdd => {
 }
 
 export const getCart = id => {
-  return dispatch => {
+  return async dispatch => {
     try {
       console.log('CURRENTLY USING DUMMY ID 1, LOOK AT app.js')
-      let cart = axios.get(`api/users/${id}/cart`)
-      const action = gotCart(cart.data)
-      dispatch(gotCart(action))
+      let userCart = await axios.get(`/api/users/${id}/cart`)
+      const action = gotCart(userCart.data)
+      dispatch(action)
     } catch (error) {
       console.log(error)
     }
@@ -46,10 +46,9 @@ export const getCart = id => {
 //REDUCER
 
 export default function(state = defaultCart, action) {
-  console.log('action:', action)
   switch (action.type) {
     case GOT_CART:
-      return action.cart
+      return action.userCart
     case ADD_TO_CART:
       return [...state, action.productToAdd]
     default:
