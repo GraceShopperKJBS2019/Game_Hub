@@ -23,12 +23,12 @@ const gotCart = cart => {
 }
 
 // THUNK CREATORS
-export const cartAdder = productToAdd => {
-  return dispatch => {
-    const productAdded = addToCart(productToAdd)
-    dispatch(productAdded)
-  }
-}
+// export const cartAdder = (id, productToAdd)=> {
+//   return async dispatch => {
+//     const productAdded = await axios.post(`/api/users/${id}/cart`, productToAdd);
+//     dispatch(productAdded)
+//   }
+// }
 
 export const getCart = id => {
   return async dispatch => {

@@ -19,7 +19,6 @@ router.get('/', async (req, res, next) => {
 //
 router.get('/:userId/cart', async (req, res, next) => {
   try {
-    // hit db for
     const cartItems = await Cart.findAll({
       where: {
         userId: req.params.userId
@@ -31,6 +30,33 @@ router.get('/:userId/cart', async (req, res, next) => {
       ]
     })
     res.send(cartItems)
+  } catch (error) {
+    next(error)
+  }
+  // router.post('/:userId/cart', async (req, res, next) => {
+  //   try {
+  //     const itemToBeAdded = await Cart.create({
+  //       userId: req.params.userId,
+  //       productId: req.body.productId
+  //     });
+  //   } catch (error){
+  //     next(error);
+  //   }
+
+  // })
+})
+router.post('/', async function(req, res, next) {
+  try {
+    const exists = await Student.findOne({
+      where: {id: req.body.id}
+    })
+    if (!exists) {
+      const newStudent = await Student.create(req.body)
+      res.status(201)
+      res.send(newStudent)
+    } else {
+      res.sendStatus(303)
+    }
   } catch (error) {
     next(error)
   }
