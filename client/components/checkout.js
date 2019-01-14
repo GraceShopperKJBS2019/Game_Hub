@@ -37,10 +37,10 @@ class CheckoutModal extends React.Component {
   }
 
   handleSubmit(event, userId) {
-    console.log('USERID SUBMIT', userId)
+    // console.log('USERID SUBMIT', userId)
+    this.props.finishOrder(userId)
     event.preventDefault()
     this.closeModal()
-    this.props.finishOrder(userId)
     this.setState({
       transactions: this.props.cart
     })
