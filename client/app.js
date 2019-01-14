@@ -17,6 +17,7 @@ import {games} from './store/products'
 import {getCart} from './store/cart'
 import {getOrders} from './store/orderHistory'
 import Landing from './components/hero'
+import {Sticky} from 'semantic-ui-react'
 
 class App extends Component {
   componentDidMount() {
@@ -30,7 +31,9 @@ class App extends Component {
       <div
         style={{display: 'flex', minHeight: '100vh', flexDirection: 'column'}}
       >
-        <Navbar />
+        <Sticky>
+          <Navbar />
+        </Sticky>
         <Routes />
         <main style={{flex: 1}}>
           <Switch>
