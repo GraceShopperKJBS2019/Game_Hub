@@ -12,12 +12,12 @@ const gotOrders = orders => {
   }
 }
 
-// const setOrder = (order) => {
-//   return {
-//     type: SET_ORDER,
-//     order
-//   }
-// }
+const setOrder = orders => {
+  return {
+    type: SET_ORDER,
+    orders
+  }
+}
 
 // ACTION THUNKS
 export const getOrders = id => {
@@ -25,6 +25,21 @@ export const getOrders = id => {
     try {
       let orders = await axios.get(`/api/orderhistory/${id}`)
       const action = gotOrders(orders.data)
+      dispatch(action)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+export const postOrder = (id, cart) => {
+  console.log('!!!!!CART!!!!!!', cart)
+  return async dispatch => {
+    try {
+      let addedOrder = await axios.post(`/api/orderhistory/${id}`, cart)
+
+      console.log(addedOrder.data)
+
+      const action = setOrder(addedOrder.data)
       dispatch(action)
     } catch (error) {
       console.log(error)

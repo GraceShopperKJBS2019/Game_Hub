@@ -11,8 +11,9 @@ import {
   Segment,
   Sidebar
 } from 'semantic-ui-react'
-
 import {connect} from 'react-redux'
+import {postOrder} from '../store/orderHistory'
+
 class CheckoutModal extends React.Component {
   constructor() {
     super()
@@ -38,12 +39,10 @@ class CheckoutModal extends React.Component {
 
   handleSubmit(event, userId) {
     // console.log('USERID SUBMIT', userId)
+    this.props.postOrder(userId, this.props.cart)
     this.props.finishOrder(userId)
     event.preventDefault()
     this.closeModal()
-    this.setState({
-      transactions: this.props.cart
-    })
   }
 
   closeModal() {
@@ -52,8 +51,7 @@ class CheckoutModal extends React.Component {
   render() {
     const {visible, showModal} = this.state
     const {user} = this.props
-    console.log('props', this.props)
-    console.log('transactions', this.state.transactions)
+    console.log('!!!!!props in checkout!!!!!', this.props)
     return (
       <Modal
         onClose={this.closeModal}
@@ -140,6 +138,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => ({
-  finishOrder: userId => dispatch(finishOrder(userId))
+  finishOrder: userId => dispatch(finishOrder(userId)),
+  postOrder: (userId, cart) => dispatch(postOrder(userId, cart))
 })
 export default connect(mapStateToProps, mapDispatchToProps)(CheckoutModal)
