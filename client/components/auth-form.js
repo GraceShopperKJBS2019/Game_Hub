@@ -30,6 +30,22 @@ const AuthForm = props => {
             placeholder="password"
             type="password"
           />
+          {name === 'signup' && (
+            <Form.Input
+              label="firstName"
+              name="firstName"
+              placeholder="firstName"
+              type="string"
+            />
+          )}
+          {name === 'signup' && (
+            <Form.Input
+              label="lastName"
+              name="lastName"
+              placeholder="lastName"
+              type="string"
+            />
+          )}
           <Form.Button type="submit">{displayName}</Form.Button>
           {error && error.response && <div> {error.response.data} </div>}
           <GoogleLogin
@@ -73,12 +89,18 @@ const mapDispatch = dispatch => {
       const formName = evt.target.name
       const email = evt.target.email.value
       const password = evt.target.password.value
-      dispatch(auth(email, password, formName))
+      let firstName = ''
+      let lastName = ''
+      if (formName === 'signup') {
+        firstName = evt.target.firstName.value
+        lastName = evt.target.lastName.value
+      }
+      dispatch(auth(email, password, formName, firstName, lastName))
     }
   }
 }
 
-export const Login = connect(mapLogin, mapDispatch)(AuthForm)
+export const loginSignupForm = connect(mapLogin, mapDispatch)(AuthForm)
 export const Signup = connect(mapSignup, mapDispatch)(AuthForm)
 
 /**
