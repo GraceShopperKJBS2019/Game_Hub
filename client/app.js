@@ -16,6 +16,7 @@ import {connect} from 'react-redux'
 import {games} from './store/products'
 import {getCart} from './store/cart'
 import {getOrders} from './store/orderHistory'
+import Landing from './components/hero'
 
 class App extends Component {
   componentDidMount() {
@@ -31,7 +32,7 @@ class App extends Component {
         <Routes />
         <main>
           <Switch>
-            <Route exact path="/" component={Slider} />
+            <Route exact path="/" component={Landing} />
             <Route exact path="/products" component={AllGames} />
             <Route path="/products/xbox" component={AllXboxGames} />
             <Route path="/products/pc" component={AllPcGames} />
