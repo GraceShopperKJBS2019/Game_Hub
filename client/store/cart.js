@@ -41,7 +41,6 @@ const deleteFromCart = cartItem => {
 export const getCart = id => {
   return async dispatch => {
     try {
-      console.log('CURRENTLY USING DUMMY ID 1, LOOK AT app.js')
       let userCart = await axios.get(`/api/users/${id}/cart`)
       const action = gotCart(userCart.data)
       dispatch(action)
@@ -50,12 +49,11 @@ export const getCart = id => {
     }
   }
 }
-const dummyID = 1
-export const cartAdder = productToAdd => {
+export const cartAdder = (id, productToAdd) => {
   return async dispatch => {
     try {
       const productAdded = await axios.post(
-        `/api/users/${dummyID}/cart`,
+        `/api/users/${id}/cart`,
         productToAdd
       )
       const action = addToCart({...productAdded.data, product: productToAdd})

@@ -24,7 +24,6 @@ const CartModal = props => {
   //   return elem.currentPrice
   // })
   let total = 0
-
   return (
     <Modal
       trigger={
