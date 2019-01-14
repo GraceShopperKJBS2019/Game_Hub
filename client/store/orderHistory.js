@@ -35,7 +35,7 @@ export const getOrders = id => {
 export default function(state = [], action) {
   switch (action.type) {
     case GET_ORDER:
-      return action.order
+      return action.orders
     default:
       return state
   }

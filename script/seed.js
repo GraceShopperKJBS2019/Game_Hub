@@ -1,6 +1,12 @@
 'use strict'
 const db = require('../server/db')
-const {User, Product, Review, Cart} = require('../server/db/models')
+const {
+  User,
+  Product,
+  Review,
+  Cart,
+  OrderHistory
+} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
@@ -188,9 +194,35 @@ async function seed() {
       productId: 2
     })
   ])
-
   console.log(`seeded ${carts.length} carts`)
   console.log(`seeded carts successfully`)
+
+  const Orders = await Promise.all([
+    OrderHistory.create({
+      productName: 'Grim Dawn',
+      imageUrl:
+        'https://hb.imgix.net/18eda5bccfb1095c66c64d0fdafef3983355ec5e.jpg?auto=compress,format&fit=crop&h=353&w=616&s=795903240797be65dc1617609f66f03a',
+      checkoutPrice: 2555,
+      userId: 1
+    }),
+    OrderHistory.create({
+      productName: 'Grim Dawn',
+      imageUrl:
+        'https://hb.imgix.net/18eda5bccfb1095c66c64d0fdafef3983355ec5e.jpg?auto=compress,format&fit=crop&h=353&w=616&s=795903240797be65dc1617609f66f03a',
+      checkoutPrice: 2555,
+      userId: 1
+    }),
+
+    OrderHistory.create({
+      productName: 'Grim Dawn',
+      imageUrl:
+        'https://hb.imgix.net/18eda5bccfb1095c66c64d0fdafef3983355ec5e.jpg?auto=compress,format&fit=crop&h=353&w=616&s=795903240797be65dc1617609f66f03a',
+      checkoutPrice: 2555,
+      userId: 2
+    })
+  ])
+  console.log(`seeded ${Orders.length} order history`)
+  console.log(`seeded order history successfully`)
 }
 
 // We've separated the `seed` function from the `runSeed` function.
