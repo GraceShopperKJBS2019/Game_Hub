@@ -15,6 +15,7 @@ import {Navlink, Switch, Route, withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {games} from './store/products'
 import {getCart} from './store/cart'
+import {getOrders} from './store/orderHistory'
 
 class App extends Component {
   componentDidMount() {
@@ -23,6 +24,7 @@ class App extends Component {
 
   render() {
     this.props.user.id && this.props.getCart(this.props.user.id)
+    this.props.user.id && this.props.getOrders(this.props.user.id)
     return (
       <div>
         <Navbar />
@@ -52,7 +54,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getProducts: () => dispatch(games()),
-    getCart: id => dispatch(getCart(id))
+    getCart: id => dispatch(getCart(id)),
+    getOrders: id => dispatch(getOrders(id))
   }
 }
 

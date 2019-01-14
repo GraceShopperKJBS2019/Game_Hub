@@ -27,3 +27,17 @@ router.get('/:userId', async (req, res, next) => {
     next(error)
   }
 })
+
+router.post('/:userId', async (req, res, next) => {
+  try {
+    const toCreate = await OrderHistory.create({
+      productName: req.body.productName,
+      imageURL: req.body.imageURL,
+      checkoutPrice: req.body.checkoutPrice,
+      userId: req.params.userId
+    })
+    res.send(toCreate)
+  } catch (error) {
+    next(error)
+  }
+})
