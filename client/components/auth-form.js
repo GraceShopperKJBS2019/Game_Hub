@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import {auth} from '../store'
 import {Form, Container} from 'semantic-ui-react'
 import {GoogleLogin} from 'react-google-login'
+
 /**
  * COMPONENT
  */
@@ -33,6 +34,7 @@ const AuthForm = props => {
           <Form.Button type="submit">{displayName}</Form.Button>
           {error && error.response && <div> {error.response.data} </div>}
           <GoogleLogin
+            clientId="116286742111-55fq55eqqfkfj122hit40rn9k7hkdlav.apps.googleusercontent.com"
             buttonText="Login"
             onSuccess={responseGoogle}
             onFailure={responseGoogle}
