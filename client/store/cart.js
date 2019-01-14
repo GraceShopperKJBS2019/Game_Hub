@@ -26,7 +26,8 @@ const gotCart = cart => {
 
 const finishedOrder = () => {
   return {
-    type: FINISH_ORDER
+    type: FINISH_ORDER,
+    emptycart: []
   }
 }
 const deleteFromCart = cartItem => {
@@ -97,7 +98,8 @@ export default function(state = defaultCart, action) {
     case ADD_TO_CART:
       return [...state, action.productToAdd]
     case FINISH_ORDER:
-      return []
+      console.log(action)
+      return action.emptycart
     case DELETE_FROM_CART:
       return state.filter(item => item.id !== action.cartItem.id)
     default:

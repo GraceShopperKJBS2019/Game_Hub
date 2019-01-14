@@ -68,6 +68,7 @@ router.delete('/:userId/cart', async (req, res, next) => {
         userId: req.params.userId
       }
     })
+    res.sendStatus(202)
   } catch (error) {
     next(error)
   }
