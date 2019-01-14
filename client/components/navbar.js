@@ -9,7 +9,12 @@ import CartModal from './cart'
 const Navbar = props => (
   <Menu inverted color="black">
     <Menu.Item as={Link} to="/">
-      <Image circular size="tiny" centered src="icon.png" />
+      <Image
+        circular
+        size="tiny"
+        centered
+        src="http://game-hub2019.herokuapp.com/icon.png"
+      />
     </Menu.Item>
     <Menu.Item>
       <Dropdown text="Platforms" button color="black">
