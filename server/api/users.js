@@ -60,3 +60,15 @@ router.delete('/cart/:cartId', async (req, res, next) => {
     next(error)
   }
 })
+
+router.delete('/:userId/cart', async (req, res, next) => {
+  try {
+    await Cart.destroy({
+      where: {
+        userId: req.params.userId
+      }
+    })
+  } catch (error) {
+    next(error)
+  }
+})
