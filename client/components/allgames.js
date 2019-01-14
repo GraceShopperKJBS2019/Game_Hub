@@ -7,35 +7,33 @@ import AddToCartButton from './addToCartButton'
 
 const AllGames = props => {
   return (
-    <Grid padded>
-      <Grid.Row columns={5}>
-        {props.products.map(product => {
-          return (
-            <Grid.Column key={product.id}>
-              <Card style={{width: '200px'}}>
-                <Image
-                  height="250px"
-                  width="300px"
-                  src={product.imageUrl}
-                  href={'./products/' + product.id}
-                />
-                <Card.Content>
-                  <div className="product name and price">
-                    <Card.Header>{product.name}</Card.Header>
-                    <Card.Header>
-                      {'$' +
-                        product.currentPrice.toString().slice(0, -2) +
-                        '.' +
-                        product.currentPrice.toString().slice(-2)}
-                      <AddToCartButton product={product} />
-                    </Card.Header>
-                  </div>
-                </Card.Content>
-              </Card>
-            </Grid.Column>
-          )
-        })}
-      </Grid.Row>
+    <Grid container columns={5} doubling>
+      {props.products.map(product => {
+        return (
+          <Grid.Column key={product.id}>
+            <Card style={{width: '200px'}}>
+              <Image
+                height="250px"
+                width="300px"
+                src={product.imageUrl}
+                href={'./products/' + product.id}
+              />
+              <Card.Content>
+                <div className="product name and price">
+                  <Card.Header>{product.name}</Card.Header>
+                  <Card.Header>
+                    {'$' +
+                      product.currentPrice.toString().slice(0, -2) +
+                      '.' +
+                      product.currentPrice.toString().slice(-2)}
+                    <AddToCartButton product={product} />
+                  </Card.Header>
+                </div>
+              </Card.Content>
+            </Card>
+          </Grid.Column>
+        )
+      })}
     </Grid>
   )
 }
