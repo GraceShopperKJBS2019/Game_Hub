@@ -27,10 +27,12 @@ class App extends Component {
     this.props.user.id && this.props.getCart(this.props.user.id)
     this.props.user.id && this.props.getOrders(this.props.user.id)
     return (
-      <div>
+      <div
+        style={{display: 'flex', minHeight: '100vh', flexDirection: 'column'}}
+      >
         <Navbar />
         <Routes />
-        <main>
+        <main style={{flex: 1}}>
           <Switch>
             <Route exact path="/" component={Landing} />
             <Route exact path="/products" component={AllGames} />
