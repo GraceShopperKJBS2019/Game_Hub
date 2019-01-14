@@ -13,16 +13,30 @@ router.get('/', async (req, res, next) => {
 })
 
 router.get('/:userId', async (req, res, next) => {
-  console.log(req.params.userId)
+  // console.log(req.params.userId)
   try {
     const userOrders = await OrderHistory.findAll({
       where: {
         userId: req.params.userId
       }
     })
-    console.log(userOrders)
+    // console.log(userOrders)
 
     res.send(userOrders)
+  } catch (error) {
+    next(error)
+  }
+})
+
+router.post('/:userId', async (req, res, next) => {
+  try {
+    const toCreate = await OrderHistory.create({
+      productName: req.body.productName,
+      imageURL: req.body.imageURL,
+      checkoutPrice: req.body.checkoutPrice,
+      userId: req.params.userId
+    })
+    res.send(toCreate)
   } catch (error) {
     next(error)
   }

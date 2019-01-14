@@ -8,15 +8,10 @@ const OrderHistory = db.define('orderHistory', {
     allowNull: false
   },
   imageURL: {
-    type: Sequelize.TEXT,
-    allowNull: false
+    type: Sequelize.TEXT
   },
   checkoutPrice: {
     type: Sequelize.INTEGER,
-    allowNull: false
-  },
-  date: {
-    type: Sequelize.DATE,
     allowNull: false
   }
 })
