@@ -102,7 +102,7 @@ const mapDispatch = dispatch => {
   }
 }
 
-export const loginSignupForm = connect(mapLogin, mapDispatch)(AuthForm)
+export const Login = connect(mapLogin, mapDispatch)(AuthForm)
 export const Signup = connect(mapSignup, mapDispatch)(AuthForm)
 
 /**
