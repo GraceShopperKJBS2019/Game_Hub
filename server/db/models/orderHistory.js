@@ -2,23 +2,23 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 // ID, userID (through association), transaction description = {DATE, GAMES, TOTAL COST, ADDRESS, PAYMENT}
-const orderHistory = db.define('orderHistory', {
+const OrderHistory = db.define('orderHistory', {
+  productName: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  imageURL: {
+    type: Sequelize.TEXT,
+    allowNull: false
+  },
+  checkoutPrice: {
+    type: Sequelize.INTEGER,
+    allowNull: false
+  },
   date: {
-    type: Sequelize.DATE
-  },
-  totalCost: {
-    type: Sequelize.DECIMAL,
-    allowNull: false,
-    validate: {
-      notEmpty: true
-    }
-  },
-  address: {
-    type: Sequelize.STRING
-  },
-  payment: {
-    type: Sequelize.STRING
+    type: Sequelize.DATE,
+    allowNull: false
   }
 })
 
-module.exports = orderHistory
+module.exports = OrderHistory
