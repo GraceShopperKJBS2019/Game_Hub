@@ -36,11 +36,11 @@ class CheckoutModal extends React.Component {
     this.setState({visible: true})
   }
 
-  handleSubmit(event) {
-    console.log('event', event)
+  handleSubmit(event, userId) {
+    console.log('USERID SUBMIT', userId)
     event.preventDefault()
     this.closeModal()
-    this.props.finishOrder()
+    this.props.finishOrder(userId)
     this.setState({
       transactions: this.props.cart
     })
@@ -51,6 +51,7 @@ class CheckoutModal extends React.Component {
   }
   render() {
     const {visible, showModal} = this.state
+    const {user} = this.props
     console.log('props', this.props)
     console.log('transactions', this.state.transactions)
     return (
@@ -88,7 +89,7 @@ class CheckoutModal extends React.Component {
                     <label>Card Code</label>
                     <input placeholder="CardCode" />
                   </Form.Field>
-                  <Button onClick={event => this.handleSubmit(event)}>
+                  <Button onClick={event => this.handleSubmit(event, user.id)}>
                     Submit
                   </Button>
                 </Form>
@@ -133,11 +134,12 @@ class CheckoutModal extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    cart: state.cart
+    cart: state.cart,
+    user: state.user
   }
 }
 
 const mapDispatchToProps = dispatch => ({
-  finishOrder: () => dispatch(finishOrder())
+  finishOrder: userId => dispatch(finishOrder(userId))
 })
 export default connect(mapStateToProps, mapDispatchToProps)(CheckoutModal)

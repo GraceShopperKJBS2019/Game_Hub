@@ -78,6 +78,18 @@ export const deleteFromCartThunk = cartId => {
   }
 }
 
+export const finishOrder = userId => {
+  return async dispatch => {
+    try {
+      //axios post to order histories here
+      await axios.delete(`/api/users/${userId}/cart`)
+      dispatch(finishedOrder())
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
 //REDUCER
 
 export default function(state = defaultCart, action) {
