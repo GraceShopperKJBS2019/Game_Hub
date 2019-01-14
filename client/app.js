@@ -7,7 +7,8 @@ import {
   AllPcGames,
   AllXboxGames,
   AllPlaystayGames,
-  AllSwitchGames
+  AllSwitchGames,
+  Footer
 } from './components'
 import Routes from './routes'
 import {Navlink, Switch, Route, withRouter} from 'react-router-dom'
@@ -37,6 +38,7 @@ class App extends Component {
             <Route path="/products/:id" component={singleProduct} />
           </Switch>
         </main>
+        <Footer />
       </div>
     )
   }
