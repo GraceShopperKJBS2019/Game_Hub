@@ -5,7 +5,7 @@ import {cartAdder} from '../store/cart'
 
 const AddToCartButton = props => {
   return (
-    <Button animated onClick={() => props.add(props.product)}>
+    <Button animated onClick={() => props.add(props.user.id, props.product)}>
       <Button.Content hidden>Cart It</Button.Content>
       <Button.Content visible>
         <Icon name="shop" />
@@ -14,12 +14,18 @@ const AddToCartButton = props => {
   )
 }
 
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  }
+}
+
 const mapDispatchToProps = dispatch => {
   return {
-    add: product => {
-      dispatch(cartAdder(product))
+    add: (id, product) => {
+      dispatch(cartAdder(id, product))
     }
   }
 }
 
-export default connect(null, mapDispatchToProps)(AddToCartButton)
+export default connect(mapStateToProps, mapDispatchToProps)(AddToCartButton)

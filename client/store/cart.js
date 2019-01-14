@@ -26,7 +26,8 @@ const gotCart = cart => {
 
 const finishedOrder = () => {
   return {
-    type: FINISH_ORDER
+    type: FINISH_ORDER,
+    emptycart: []
   }
 }
 const deleteFromCart = cartItem => {
@@ -41,7 +42,6 @@ const deleteFromCart = cartItem => {
 export const getCart = id => {
   return async dispatch => {
     try {
-      console.log('CURRENTLY USING DUMMY ID 1, LOOK AT app.js')
       let userCart = await axios.get(`/api/users/${id}/cart`)
       const action = gotCart(userCart.data)
       dispatch(action)
@@ -50,12 +50,11 @@ export const getCart = id => {
     }
   }
 }
-const dummyID = 1
-export const cartAdder = productToAdd => {
+export const cartAdder = (id, productToAdd) => {
   return async dispatch => {
     try {
       const productAdded = await axios.post(
-        `/api/users/${dummyID}/cart`,
+        `/api/users/${id}/cart`,
         productToAdd
       )
       const action = addToCart({...productAdded.data, product: productToAdd})
@@ -78,6 +77,18 @@ export const deleteFromCartThunk = cartId => {
   }
 }
 
+export const finishOrder = userId => {
+  return async dispatch => {
+    try {
+      //axios post to order histories here
+      await axios.delete(`/api/users/${userId}/cart`)
+      dispatch(finishedOrder())
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
 //REDUCER
 
 export default function(state = defaultCart, action) {
@@ -87,7 +98,8 @@ export default function(state = defaultCart, action) {
     case ADD_TO_CART:
       return [...state, action.productToAdd]
     case FINISH_ORDER:
-      return []
+      console.log(action)
+      return action.emptycart
     case DELETE_FROM_CART:
       return state.filter(item => item.id !== action.cartItem.id)
     default:

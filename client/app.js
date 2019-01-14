@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-
 import {
   Slider,
   Navbar,
@@ -19,10 +18,10 @@ import {getCart} from './store/cart'
 class App extends Component {
   componentDidMount() {
     this.props.getProducts()
-    this.props.getCart(1)
   }
 
   render() {
+    this.props.user.id && this.props.getCart(this.props.user.id)
     return (
       <div>
         <Navbar />
@@ -43,6 +42,11 @@ class App extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  }
+}
 const mapDispatchToProps = dispatch => {
   return {
     getProducts: () => dispatch(games()),
@@ -50,4 +54,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default withRouter(connect(null, mapDispatchToProps)(App))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App))
