@@ -1,4 +1,5 @@
 import axios from 'axios'
+import {CommentActions} from 'semantic-ui-react'
 
 // ACTION TYPES
 const SET_ORDER = 'SET_ORDER'
@@ -31,13 +32,33 @@ export const getOrders = id => {
     }
   }
 }
-export const postOrder = (id, cart) => {
-  console.log('!!!!!CART!!!!!!', cart)
+export const postOrder = (address, user, cart) => {
+  const toSend = {
+    cart,
+    userEmail: user.email,
+    address
+  }
   return async dispatch => {
     try {
-      let addedOrder = await axios.post(`/api/orderhistory/${id}`, cart)
+      let addedOrder = await axios.post(`/api/orderhistory/${user.id}`, toSend)
       const action = setOrder(addedOrder.data)
       dispatch(action)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
+export const postGuestOrder = (address, email, cart) => {
+  const toSend = {
+    cart,
+    email,
+    address
+  }
+  console.log(toSend)
+  return async dispatch => {
+    try {
+      await axios.post(`/api/orderhistory/guestCheckout`, toSend)
     } catch (error) {
       console.log(error)
     }

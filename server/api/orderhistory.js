@@ -38,19 +38,40 @@ router.get('/:userId', async (req, res, next) => {
   }
 })
 
+router.post('/guestCheckout', async (req, res, next) => {
+  // console.log(req.body);
+  try {
+    const toCreate = await Promise.all(
+      req.body.cart.map(elem => {
+        return OrderHistory.create({
+          productName: elem.name,
+          imageURL: elem.imageUrl,
+          checkoutPrice: elem.currentPrice,
+          userId: null,
+          email: req.body.email,
+          address: req.body.address
+        })
+      })
+    )
+    res.send(toCreate)
+  } catch (error) {
+    next(error)
+  }
+})
 router.post('/:userId', async (req, res, next) => {
   try {
     const toCreate = await Promise.all(
-      req.body.map(elem => {
+      req.body.cart.map(elem => {
         return OrderHistory.create({
           productName: elem.product.name,
           imageURL: elem.product.imageUrl,
           checkoutPrice: elem.product.currentPrice,
-          userId: req.params.userId
+          userId: req.params.userId,
+          email: req.body.userEmail,
+          address: req.body.address
         })
       })
     )
-    console.log(toCreate)
     res.send(toCreate)
   } catch (error) {
     next(error)

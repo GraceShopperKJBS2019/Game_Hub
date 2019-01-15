@@ -90,12 +90,12 @@ const CartModal = props => {
           </Item>
         </Item.Group>
         <Segment color="black" inverted />
-        <Form>
+        {/* <Form>
           <Form.Field width="four">
             <label>Email</label>
             <input placeholder="Enter Email" />
           </Form.Field>
-        </Form>
+        </Form> */}
         <CheckoutModal />
       </Modal.Content>
     </Modal>
