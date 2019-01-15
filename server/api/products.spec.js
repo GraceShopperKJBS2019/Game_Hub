@@ -2,6 +2,7 @@ const {expect} = require('chai')
 const request = require('supertest')
 const db = require('../db')
 const app = require('../index')
+const agent = request.agent(app)
 const Product = db.model('product')
 
 describe('Tier Two - API Routes', () => {
@@ -26,14 +27,26 @@ describe('Tier Two - API Routes', () => {
           releaseDate: new Date(2018, 12, 18)
         })
       })
+      describe('GET /products', () => {
+        it('retrieves all products', async () => {
+          const response = await request(app)
+            .get('/api/products')
+            .expect(200)
 
-      it('GET /api/products', async () => {
-        const response = await request(app)
-          .get('/api/products')
-          .expect(200)
+          expect(response.body).to.be.an('array')
+          expect(response.body[0].name).to.be.equal(game)
+        })
+      })
 
-        expect(response.body).to.be.an('array')
-        expect(response.body[0].name).to.be.equal(game)
+      describe('GET api/products/:productID', () => {
+        it('retrieves a single product by their productID', () => {
+          return agent
+            .get(`/products/${productID}`)
+            .expect(200)
+            .expect(res => {
+              expect(res.body.name).to.equal('Atlas')
+            })
+        })
       })
     })
   })
