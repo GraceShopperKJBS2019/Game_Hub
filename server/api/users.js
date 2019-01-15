@@ -25,7 +25,7 @@ router.get('/', async (req, res, next) => {
 //
 router.get('/:userId/cart', async (req, res, next) => {
   try {
-    if (req.user.id == !req.params.userId) {
+    if (req.user.id === !req.params.userId) {
       res.send(
         'go to bestgraceshopper.herokuapp.com instead if you wanna hack somebody'
       )
