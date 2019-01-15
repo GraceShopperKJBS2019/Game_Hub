@@ -37,17 +37,6 @@ describe('Tier Two - API Routes', () => {
           expect(response.body[0].name).to.be.equal(game)
         })
       })
-
-      describe('GET api/products/:productID', () => {
-        it('retrieves a single product by their productID', () => {
-          return agent
-            .get(`/products/${productID}`)
-            .expect(200)
-            .expect(res => {
-              expect(res.body.name).to.equal('Atlas')
-            })
-        })
-      })
     })
   })
 })
