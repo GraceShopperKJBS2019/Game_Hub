@@ -60,6 +60,15 @@ const Navbar = props => (
     <Menu.Item>
       {props.isLoggedIn && <Button onClick={props.handleClick}>Logout</Button>}
     </Menu.Item>
+    <Menu.Item>
+      {props.isLoggedIn && (
+        <Dropdown button icon="user">
+          <Dropdown.Menu>
+            <Dropdown.Item as={Link} to="/orders" text="Past Orders" />
+          </Dropdown.Menu>
+        </Dropdown>
+      )}
+    </Menu.Item>
   </Menu>
 )
 
@@ -68,7 +77,8 @@ const Navbar = props => (
  */
 const mapState = state => {
   return {
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    user: state.user
   }
 }
 
