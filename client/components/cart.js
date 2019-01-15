@@ -36,19 +36,19 @@ const CartModal = props => {
       <Header icon="shopping cart" content="Shopping Cart" />
       <Modal.Content>
         <Item.Group divided>
-          {cart.map(cartItem => {
+          {cart.map((cartItem, idx) => {
             const product = cartItem
             total += product.currentPrice
             if (product.inventory && product.currentPrice === product.msrp) {
               return (
-                <Item key={cartItem.Id}>
+                <Item key={idx}>
                   <Item.Image size="tiny" src={product.imageUrl} />
                   <Item.Content verticalAlign="middle">
                     <Item.Header>{product.name}</Item.Header>
                     <Item.Meta>
                       <span>{priceHelper(product.currentPrice)}</span>
                       <span>
-                        <RemoveFromCartButton cart={cartItem} />
+                        <RemoveFromCartButton cart={cartItem} idx={idx} />
                       </span>
                     </Item.Meta>
                   </Item.Content>
@@ -56,7 +56,7 @@ const CartModal = props => {
               )
             } else {
               return (
-                <Item key={cartItem.id}>
+                <Item key={idx}>
                   <Item.Image size="tiny" src={product.imageUrl} />
                   <Item.Content verticalAlign="middle">
                     <Item.Header>{product.name}</Item.Header>
@@ -64,7 +64,7 @@ const CartModal = props => {
                       <strike> {priceHelper(product.msrp)}</strike>
                       <span> {priceHelper(product.currentPrice)}</span>
                       <span>
-                        <RemoveFromCartButton cart={cartItem} />
+                        <RemoveFromCartButton cart={cartItem} idx={idx} />
                       </span>
                     </Item.Meta>
                   </Item.Content>
@@ -77,22 +77,6 @@ const CartModal = props => {
         <Item.Group>
           <Item>
             <Item.Header>Total: {priceHelper(total)}</Item.Header>
-            {/* <span>
-              {'$' +
-                pricesArr
-                  .reduce((accumulator, currentValue, currentIndex, array) => {
-                    return accumulator + currentValue
-                  }, 0)
-                  .toString()
-                  .slice(0, -2) +
-                '.' +
-                pricesArr
-                  .reduce((accumulator, currentValue, currentIndex, array) => {
-                    return accumulator + currentValue
-                  }, 0)
-                  .toString()
-                  .slice(-2)}
-            </span> */}
           </Item>
         </Item.Group>
         <Segment color="black" inverted />

@@ -7,6 +7,7 @@ const GOT_CART = 'GOT_CART'
 const ADD_TO_CART = 'ADD_TO_CART'
 const FINISH_ORDER = 'FINISH_ORDER'
 const DELETE_FROM_CART = 'DELETE_FROM_CART'
+const DELETE_FROM_GUEST_CART = 'DELETE_FROM_GUEST_CART'
 
 //INITIAL STATE
 const defaultCart = []
@@ -37,6 +38,12 @@ const deleteFromCart = cartItem => {
   }
 }
 
+const deleteFromGuestCart = idx => {
+  return {
+    type: DELETE_FROM_GUEST_CART,
+    idx
+  }
+}
 //THUNK CREATORS
 
 export const getCart = id => {
@@ -90,12 +97,21 @@ export const cartAdder = (id, productToAdd) => {
   }
 }
 
-export const deleteFromCartThunk = cartId => {
+export const deleteFromCartThunk = (cartId, idx) => {
   return async dispatch => {
     try {
-      const gameToRemove = await axios.delete(`/api/users/cart/${cartId}`)
-      const action = deleteFromCart(gameToRemove.data)
-      dispatch(action)
+      if (idx || idx === 0) {
+        let newCart = JSON.parse(window.localStorage.getItem('cart'))
+        newCart.splice(idx, 1)
+        window.localStorage.clear()
+        window.localStorage.setItem('cart', JSON.stringify(newCart))
+        const action = deleteFromGuestCart(idx)
+        dispatch(action)
+      } else {
+        const gameToRemove = await axios.delete(`/api/users/cart/${cartId}`)
+        const action = deleteFromCart(gameToRemove.data)
+        dispatch(action)
+      }
     } catch (error) {
       console.log(error)
     }
@@ -127,6 +143,8 @@ export default function(state = defaultCart, action) {
       return action.emptycart
     case DELETE_FROM_CART:
       return state.filter(item => item.id !== action.cartItem.id)
+    case DELETE_FROM_GUEST_CART:
+      return state.filter((item, idx) => idx !== action.idx)
     default:
       return state
   }
