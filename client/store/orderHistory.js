@@ -12,12 +12,12 @@ const gotOrders = orders => {
   }
 }
 
-// const setOrder = (order) => {
-//   return {
-//     type: SET_ORDER,
-//     order
-//   }
-// }
+const setOrder = orders => {
+  return {
+    type: SET_ORDER,
+    orders
+  }
+}
 
 // ACTION THUNKS
 export const getOrders = id => {
@@ -31,11 +31,25 @@ export const getOrders = id => {
     }
   }
 }
+export const postOrder = (id, cart) => {
+  console.log('!!!!!CART!!!!!!', cart)
+  return async dispatch => {
+    try {
+      let addedOrder = await axios.post(`/api/orderhistory/${id}`, cart)
+      const action = setOrder(addedOrder.data)
+      dispatch(action)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
 
 export default function(state = [], action) {
   switch (action.type) {
     case GET_ORDER:
       return action.orders
+    case SET_ORDER:
+      return [...state, ...action.orders]
     default:
       return state
   }
