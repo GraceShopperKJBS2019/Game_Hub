@@ -36,9 +36,6 @@ export const postOrder = (id, cart) => {
   return async dispatch => {
     try {
       let addedOrder = await axios.post(`/api/orderhistory/${id}`, cart)
-
-      console.log(addedOrder.data)
-
       const action = setOrder(addedOrder.data)
       dispatch(action)
     } catch (error) {
@@ -51,6 +48,8 @@ export default function(state = [], action) {
   switch (action.type) {
     case GET_ORDER:
       return action.orders
+    case SET_ORDER:
+      return [...state, ...action.orders]
     default:
       return state
   }

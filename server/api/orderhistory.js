@@ -32,7 +32,7 @@ router.post('/:userId', async (req, res, next) => {
   try {
     const toCreate = await Promise.all(
       req.body.map(elem => {
-        OrderHistory.create({
+        return OrderHistory.create({
           productName: elem.product.name,
           imageURL: elem.product.imageURL,
           checkoutPrice: elem.product.currentPrice,
@@ -40,6 +40,7 @@ router.post('/:userId', async (req, res, next) => {
         })
       })
     )
+    console.log(toCreate)
     res.send(toCreate)
   } catch (error) {
     next(error)
