@@ -9,7 +9,8 @@ import {
   AllPlaystayGames,
   AllSwitchGames,
   Footer,
-  orderList
+  orderList,
+  NewReleases
 } from './components'
 import Routes from './routes'
 import {Navlink, Switch, Route, withRouter} from 'react-router-dom'
@@ -40,6 +41,7 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={Landing} />
             <Route exact path="/products" component={AllGames} />
+            <Route path="/products/newreleases" component={NewReleases} />
             <Route path="/products/xbox" component={AllXboxGames} />
             <Route path="/products/pc" component={AllPcGames} />
             <Route path="/products/playstation" component={AllPlaystayGames} />

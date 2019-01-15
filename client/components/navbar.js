@@ -49,7 +49,9 @@ const Navbar = props => (
         </Dropdown.Menu>
       </Dropdown>
     </Menu.Item>
-    <Menu.Item>New Releases</Menu.Item>
+    <Menu.Item as={Link} to="/products/newreleases">
+      New Releases
+    </Menu.Item>
     <Menu.Item>Sale</Menu.Item>
     <Menu.Item position="right" fitted>
       <Search />
