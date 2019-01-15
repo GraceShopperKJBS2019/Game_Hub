@@ -43,7 +43,3 @@ const Product = db.define('product', {
 })
 
 module.exports = Product
-
-Product.prototype.getCorrectConsole = function() {
-  return this.getDataValue('console')
-}
