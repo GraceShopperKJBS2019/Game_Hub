@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {auth} from '../store'
-import {Form, Container} from 'semantic-ui-react'
+import {Form, Container, Button, Modal} from 'semantic-ui-react'
 import {GoogleLogin} from 'react-google-login'
 
 /**
@@ -16,48 +16,46 @@ const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
 
   return (
-    <Container>
-      <Form unstackable onSubmit={handleSubmit} name={name}>
-        <Form.Group inline>
-          <Form.Input
-            label="email"
-            name="email"
-            placeholder="email"
-            type="text"
-          />
-          <Form.Input
-            label="password"
-            name="password"
-            placeholder="password"
-            type="password"
-          />
-          {name === 'signup' && (
-            <Form.Input
-              label="firstName"
-              name="firstName"
-              placeholder="firstName"
-              type="string"
-            />
-          )}
-          {name === 'signup' && (
-            <Form.Input
-              label="lastName"
-              name="lastName"
-              placeholder="lastName"
-              type="string"
-            />
-          )}
-          <Form.Button type="submit">{displayName}</Form.Button>
-          {error && error.response && <div> {error.response.data} </div>}
-          <GoogleLogin
-            clientId="116286742111-55fq55eqqfkfj122hit40rn9k7hkdlav.apps.googleusercontent.com"
-            buttonText="Login"
-            onSuccess={responseGoogle}
-            onFailure={responseGoogle}
-          />
-        </Form.Group>
-      </Form>
-    </Container>
+    <Modal trigger={<Button inverted>Login</Button>}>
+      <Modal.Content>
+        <Container>
+          <Form unstackable onSubmit={handleSubmit} name={name}>
+            <Form.Group inline>
+              <Form.Input name="email" placeholder="email" type="text" />
+              <Form.Input
+                name="password"
+                placeholder="password"
+                type="password"
+              />
+              {name === 'signup' && (
+                <Form.Input
+                  label="firstName"
+                  name="firstName"
+                  placeholder="firstName"
+                  type="string"
+                />
+              )}
+              {name === 'signup' && (
+                <Form.Input
+                  label="lastName"
+                  name="lastName"
+                  placeholder="lastName"
+                  type="string"
+                />
+              )}
+              <Form.Button type="submit">{displayName}</Form.Button>
+              {error && error.response && <div> {error.response.data} </div>}
+              <GoogleLogin
+                clientId="116286742111-55fq55eqqfkfj122hit40rn9k7hkdlav.apps.googleusercontent.com"
+                buttonText="Login"
+                onSuccess={responseGoogle}
+                onFailure={responseGoogle}
+              />
+            </Form.Group>
+          </Form>
+        </Container>
+      </Modal.Content>
+    </Modal>
   )
 }
 

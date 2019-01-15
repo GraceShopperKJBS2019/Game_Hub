@@ -12,7 +12,6 @@ import {
   orderList,
   NewReleases
 } from './components'
-import Routes from './routes'
 import {Navlink, Switch, Route, withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {games} from './store/products'
@@ -36,8 +35,7 @@ class App extends Component {
         <Sticky>
           <Navbar />
         </Sticky>
-        <Routes />
-        <main style={{flex: 1, paddingTop: '55px'}}>
+        <main style={{flex: 1, paddingTop: '1%'}}>
           <Switch>
             <Route exact path="/" component={Landing} />
             <Route exact path="/products" component={AllGames} />

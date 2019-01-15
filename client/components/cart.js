@@ -28,7 +28,7 @@ const CartModal = props => {
   return (
     <Modal
       trigger={
-        <Button>
+        <Button inverted>
           <Icon name="shopping cart" size="large" />
         </Button>
       }
