@@ -24,7 +24,8 @@ router.get('/:userId', async (req, res, next) => {
       const userOrders = await OrderHistory.findAll({
         where: {
           userId: req.params.userId
-        }
+        },
+        order: [['createdAt', 'DESC']]
       })
       res.send(userOrders)
     } else {
