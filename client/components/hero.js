@@ -9,7 +9,7 @@ const Landing = () => {
         style={{
           backgroundImage:
             'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(https://images.unsplash.com/photo-1492044715545-15ddedd84e5e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2550&q=80)',
-          height: '75vh',
+          height: '70vh',
           backgroundSize: 'cover'
         }}
       >
