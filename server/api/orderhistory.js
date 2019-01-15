@@ -34,9 +34,9 @@ router.post('/:userId', async (req, res, next) => {
       req.body.map(elem => {
         return OrderHistory.create({
           productName: elem.product.name,
-          imageURL: elem.product.imageURL,
+          imageURL: elem.product.imageUrl,
           checkoutPrice: elem.product.currentPrice,
-          userId: elem.userId
+          userId: req.params.userId
         })
       })
     )
