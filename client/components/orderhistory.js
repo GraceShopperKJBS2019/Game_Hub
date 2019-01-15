@@ -16,7 +16,6 @@ const orderList = props => {
         <Header name="Past Transactions" />
         <Item.Group divided>
           {orderHistory.map(orders => {
-            console.log('PAST ORDERS --->', orders)
             return (
               <Item key={orders.id}>
                 <Item.Image size="tiny" src={orders.imageURL} />

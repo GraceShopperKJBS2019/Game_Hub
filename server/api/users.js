@@ -4,13 +4,19 @@ module.exports = router
 
 router.get('/', async (req, res, next) => {
   try {
-    const users = await User.findAll({
-      // explicitly select only the id and email fields - even though
-      // users' passwords are encrypted, it won't help if we just
-      // send everything to anyone who asks!
-      attributes: ['id', 'email']
-    })
-    res.json(users)
+    if (!req.user || !req.user.admin) {
+      res.send(
+        'go to bestgraceshopper.herokuapp.com instead if you wanna hack somebody'
+      )
+    } else {
+      const users = await User.findAll({
+        // explicitly select only the id and email fields - even though
+        // users' passwords are encrypted, it won't help if we just
+        // send everything to anyone who asks!
+        attributes: ['id', 'email']
+      })
+      res.json(users)
+    }
   } catch (err) {
     next(err)
   }
@@ -19,6 +25,11 @@ router.get('/', async (req, res, next) => {
 //
 router.get('/:userId/cart', async (req, res, next) => {
   try {
+    if (req.user.id == !req.params.userId) {
+      res.send(
+        'go to bestgraceshopper.herokuapp.com instead if you wanna hack somebody'
+      )
+    }
     const cartItems = await Cart.findAll({
       where: {
         userId: req.params.userId
@@ -37,12 +48,18 @@ router.get('/:userId/cart', async (req, res, next) => {
 
 router.get('/:userId/orderhistory', async (req, res, next) => {
   try {
-    const userhistory = await OrderHistory.findAll({
-      where: {
-        userId: req.params.userId
-      }
-    })
-    res.send(userhistory)
+    if (!req.user || !req.user.admin) {
+      res.send(
+        'go to bestgraceshopper.herokuapp.com instead if you wanna hack somebody'
+      )
+    } else {
+      const userhistory = await OrderHistory.findAll({
+        where: {
+          userId: req.params.userId
+        }
+      })
+      res.send(userhistory)
+    }
   } catch (error) {
     next(error)
   }

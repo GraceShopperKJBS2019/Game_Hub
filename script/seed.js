@@ -39,6 +39,15 @@ async function seed() {
       admin: false,
       phoneNumber: '2013278910',
       billingAddress: '34 Street, New York City, NY 10001'
+    }),
+    User.create({
+      email: 'admin@gmail.com',
+      password: '123',
+      firstName: 'Doctor',
+      lastName: 'Disrespect',
+      admin: true,
+      phoneNumber: '1231231234',
+      billingAddress: 'The North Pole'
     })
   ])
 
