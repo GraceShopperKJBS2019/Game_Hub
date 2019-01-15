@@ -34,7 +34,7 @@ class App extends Component {
         <Sticky>
           <Navbar />
         </Sticky>
-        <main style={{flex: 1, paddingTop: '55px'}}>
+        <main style={{flex: 1, paddingTop: '1%'}}>
           <Switch>
             <Route exact path="/" component={Landing} />
             <Route exact path="/products" component={AllGames} />
