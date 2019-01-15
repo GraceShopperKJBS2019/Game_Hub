@@ -201,14 +201,14 @@ async function seed() {
   const Orders = await Promise.all([
     OrderHistory.create({
       productName: 'Grim Dawn',
-      imageUrl:
+      imageURL:
         'https://hb.imgix.net/18eda5bccfb1095c66c64d0fdafef3983355ec5e.jpg?auto=compress,format&fit=crop&h=353&w=616&s=795903240797be65dc1617609f66f03a',
       checkoutPrice: 2555,
       userId: 1
     }),
     OrderHistory.create({
       productName: 'Grim Dawn',
-      imageUrl:
+      imageURL:
         'https://hb.imgix.net/18eda5bccfb1095c66c64d0fdafef3983355ec5e.jpg?auto=compress,format&fit=crop&h=353&w=616&s=795903240797be65dc1617609f66f03a',
       checkoutPrice: 2555,
       userId: 1
@@ -216,7 +216,7 @@ async function seed() {
 
     OrderHistory.create({
       productName: 'Grim Dawn',
-      imageUrl:
+      imageURL:
         'https://hb.imgix.net/18eda5bccfb1095c66c64d0fdafef3983355ec5e.jpg?auto=compress,format&fit=crop&h=353&w=616&s=795903240797be65dc1617609f66f03a',
       checkoutPrice: 2555,
       userId: 2
