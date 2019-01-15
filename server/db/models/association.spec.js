@@ -73,11 +73,31 @@ describe('Tier One - Back-end', () => {
         })
       })
 
-      // describe('Cart', () => {
-      //   it('belongs to a product', async () => {
-      //     const
-      //   })
-      // })
+      describe('Cart', () => {
+        it('belongs to a product', async () => {
+          const newCart = Cart.create({
+            productId: 1
+          })
+          const newProduct = Product.create({
+            id: 1,
+            name: 'Atlas'
+          })
+          return Promise.all([newCart, newProduct])
+            .spread((createdCart, createdProduct) => {
+              return createdProduct.setCart(createdCart)
+            })
+            .then(() => {
+              return Product.findOne({
+                where: {id: 1},
+                include: {model: Cart}
+              })
+            })
+            .then(foundProduct => {
+              expect(foundProduct).to.exist
+              expect(foundProduct.Cart.name).to.equal('Atlas')
+            })
+        })
+      })
     })
   })
 })
