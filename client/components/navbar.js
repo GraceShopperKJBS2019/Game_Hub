@@ -18,7 +18,7 @@ const Navbar = props => (
       />
     </Menu.Item>
     <Menu.Item>
-      <Dropdown text="Platforms" button color="black">
+      <Dropdown className="inverted" text="Platforms" button>
         <Dropdown.Menu>
           <Dropdown.Item as={Link} to="/products">
             All platforms
