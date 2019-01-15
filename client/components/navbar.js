@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom'
 import {logout} from '../store'
 import {Menu, Image, Dropdown, Icon, Search, Button} from 'semantic-ui-react'
 import CartModal from './cart'
+import Routes from '../routes'
 
 const Navbar = props => (
   <Menu inverted color="black">
@@ -51,24 +52,31 @@ const Navbar = props => (
     </Menu.Item>
     <Menu.Item>New Releases</Menu.Item>
     <Menu.Item>Sale</Menu.Item>
+    <Menu.Item>
+      <Routes />
+    </Menu.Item>
     <Menu.Item position="right" fitted>
       <Search />
     </Menu.Item>
     <Menu.Item>
       <CartModal />
     </Menu.Item>
-    <Menu.Item>
-      {props.isLoggedIn && <Button onClick={props.handleClick}>Logout</Button>}
-    </Menu.Item>
-    <Menu.Item>
-      {props.isLoggedIn && (
+    {props.isLoggedIn && (
+      <Menu.Item>
+        <Button inverted onClick={props.handleClick}>
+          Logout
+        </Button>
+      </Menu.Item>
+    )}
+    {props.isLoggedIn && (
+      <Menu.Item>
         <Dropdown button icon="user">
           <Dropdown.Menu>
             <Dropdown.Item as={Link} to="/orders" text="Past Orders" />
           </Dropdown.Menu>
         </Dropdown>
-      )}
-    </Menu.Item>
+      </Menu.Item>
+    )}
   </Menu>
 )
 
