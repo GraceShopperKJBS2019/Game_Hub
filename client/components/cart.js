@@ -19,8 +19,8 @@ const priceHelper = price => {
 }
 
 const CartModal = props => {
-  console.log('props.cart:', props.cart)
-  const {cart} = props
+  const {cart, userId} = props
+  const isLoggedIn = !!userId
   // let pricesArr = cart.map(elem => {
   //   return elem.currentPrice
   // })
@@ -37,39 +37,49 @@ const CartModal = props => {
       <Modal.Content>
         <Item.Group divided>
           {cart.map((cartItem, idx) => {
-            const product = cartItem
-            total += product.currentPrice
-            if (product.inventory && product.currentPrice === product.msrp) {
-              return (
-                <Item key={idx}>
-                  <Item.Image size="tiny" src={product.imageUrl} />
-                  <Item.Content verticalAlign="middle">
-                    <Item.Header>{product.name}</Item.Header>
-                    <Item.Meta>
-                      <span>{priceHelper(product.currentPrice)}</span>
-                      <span>
-                        <RemoveFromCartButton cart={cartItem} idx={idx} />
-                      </span>
-                    </Item.Meta>
-                  </Item.Content>
-                </Item>
-              )
-            } else {
-              return (
-                <Item key={idx}>
-                  <Item.Image size="tiny" src={product.imageUrl} />
-                  <Item.Content verticalAlign="middle">
-                    <Item.Header>{product.name}</Item.Header>
-                    <Item.Meta>
-                      <strike> {priceHelper(product.msrp)}</strike>
-                      <span> {priceHelper(product.currentPrice)}</span>
-                      <span>
-                        <RemoveFromCartButton cart={cartItem} idx={idx} />
-                      </span>
-                    </Item.Meta>
-                  </Item.Content>
-                </Item>
-              )
+            const product = userId ? cartItem.product : cartItem
+            if (product) {
+              total += product.currentPrice
+              if (product.inventory && product.currentPrice === product.msrp) {
+                return (
+                  <Item key={idx}>
+                    <Item.Image size="tiny" src={product.imageUrl} />
+                    <Item.Content verticalAlign="middle">
+                      <Item.Header>{product.name}</Item.Header>
+                      <Item.Meta>
+                        <span>{priceHelper(product.currentPrice)}</span>
+                        <span>
+                          <RemoveFromCartButton
+                            cart={cartItem}
+                            idx={idx}
+                            loggedIn={isLoggedIn}
+                          />
+                        </span>
+                      </Item.Meta>
+                    </Item.Content>
+                  </Item>
+                )
+              } else {
+                return (
+                  <Item key={idx}>
+                    <Item.Image size="tiny" src={product.imageUrl} />
+                    <Item.Content verticalAlign="middle">
+                      <Item.Header>{product.name}</Item.Header>
+                      <Item.Meta>
+                        <strike> {priceHelper(product.msrp)}</strike>
+                        <span> {priceHelper(product.currentPrice)}</span>
+                        <span>
+                          <RemoveFromCartButton
+                            cart={cartItem}
+                            idx={idx}
+                            loggedIn={isLoggedIn}
+                          />
+                        </span>
+                      </Item.Meta>
+                    </Item.Content>
+                  </Item>
+                )
+              }
             }
           })}
         </Item.Group>
@@ -94,7 +104,8 @@ const CartModal = props => {
 
 const mapStateToProps = state => {
   return {
-    cart: state.cart || []
+    cart: state.cart || [],
+    userId: state.user.id
   }
 }
 

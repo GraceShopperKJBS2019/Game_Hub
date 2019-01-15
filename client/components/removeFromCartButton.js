@@ -6,7 +6,7 @@ import {deleteFromCartThunk} from '../store/cart'
 const RemoveFromCartButton = props => {
   return (
     <Button
-      onClick={() => props.delete(props.cart.id, props.idx)}
+      onClick={() => props.delete(props.cart.id, props.idx, props.loggedIn)}
       floated="right"
       animated
       icon="remove"
@@ -18,7 +18,9 @@ const RemoveFromCartButton = props => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    delete: (item, idx) => dispatch(deleteFromCartThunk(item, idx))
+    delete: (item, idx, loggedIn) => {
+      dispatch(deleteFromCartThunk(item, idx, loggedIn))
+    }
   }
 }
 
