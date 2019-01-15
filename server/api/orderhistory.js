@@ -5,24 +5,34 @@ module.exports = router
 // /api/orderhistory get all order history
 router.get('/', async (req, res, next) => {
   try {
-    const orders = await OrderHistory.findAll()
-    res.send(orders)
+    if (!req.user || !req.user.admin) {
+      res.send(
+        'go to bestgraceshopper.herokuapp.com instead if you wanna hack somebody'
+      )
+    } else {
+      const orders = await OrderHistory.findAll()
+      res.send(orders)
+    }
   } catch (error) {
     next(error)
   }
 })
 
 router.get('/:userId', async (req, res, next) => {
-  // console.log(req.params.userId)
   try {
-    const userOrders = await OrderHistory.findAll({
-      where: {
-        userId: req.params.userId
-      }
-    })
-    // console.log(userOrders)
-
-    res.send(userOrders)
+    if (Number(req.params.userId) === req.user.id || req.user.admin) {
+      const userOrders = await OrderHistory.findAll({
+        where: {
+          userId: req.params.userId
+        }
+      })
+      res.send(userOrders)
+    } else {
+      res.status(403)
+      res.send(
+        'go to bestgraceshopper.herokuapp.com instead if you wanna hack somebody'
+      )
+    }
   } catch (error) {
     next(error)
   }
