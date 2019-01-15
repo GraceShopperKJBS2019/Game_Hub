@@ -48,7 +48,7 @@ async function seed() {
   const products = await Promise.all([
     Product.create({
       name: 'Atlas',
-      imageUrl: 'https://static-cdn.jtvnw.net/ttv-boxart/ATLAS.jpg',
+      imageUrl: 'https://static-cdn.jtvnw.net/ttv-boxart/ATLAS-600x826.jpg',
       msrp: 5999,
       currentPrice: 2999,
       console: 'PC',
@@ -60,7 +60,7 @@ async function seed() {
     Product.create({
       name: 'Grim Dawn',
       imageUrl:
-        'https://hb.imgix.net/18eda5bccfb1095c66c64d0fdafef3983355ec5e.jpg?auto=compress,format&fit=crop&h=353&w=616&s=795903240797be65dc1617609f66f03a',
+        'https://static-cdn.jtvnw.net/ttv-boxart/Grim%20Dawn-600x826.jpg',
       msrp: 2999,
       currentPrice: 2499,
       console: 'PC',
@@ -71,7 +71,7 @@ async function seed() {
     }),
     Product.create({
       name: 'Fortnite',
-      imageUrl: 'https://static-cdn.jtvnw.net/ttv-boxart/Fortnite.jpg',
+      imageUrl: 'https://static-cdn.jtvnw.net/ttv-boxart/Fortnite-600x826.jpg',
       msrp: 3999,
       currentPrice: 2000,
       console: 'xbox',
@@ -82,7 +82,7 @@ async function seed() {
     }),
     Product.create({
       name: 'Fifa19',
-      imageUrl: 'https://static-cdn.jtvnw.net/ttv-boxart/FIFA%2019.jpg',
+      imageUrl: 'https://static-cdn.jtvnw.net/ttv-boxart/FIFA%2019-600x826.jpg',
       msrp: 5999,
       currentPrice: 2499,
       console: 'xbox',
@@ -93,7 +93,8 @@ async function seed() {
     }),
     Product.create({
       name: 'Mario Cart 8 Deluxe',
-      imageUrl: 'https://static-cdn.jtvnw.net/ttv-boxart/Mario%20Kart%208.jpg',
+      imageUrl:
+        'https://static-cdn.jtvnw.net/ttv-boxart/Mario%20Kart%208-600x826.jpg',
       msrp: 7999,
       currentPrice: 5599,
       console: 'switch',
@@ -105,7 +106,7 @@ async function seed() {
     Product.create({
       name: 'Super Smash Bros Ultimate',
       imageUrl:
-        'https://static-cdn.jtvnw.net/ttv-boxart/Super%20Smash%20Bros.%20Ultimate.jpg',
+        'https://static-cdn.jtvnw.net/ttv-boxart/Super%20Smash%20Bros.%20Ultimate-600x826.jpg',
       msrp: 7999,
       currentPrice: 7999,
       console: 'switch',
@@ -117,7 +118,7 @@ async function seed() {
     Product.create({
       name: 'Call of Duty Black Ops 4',
       imageUrl:
-        'https://static-cdn.jtvnw.net/ttv-boxart/Call%20of%20Duty%3A%20Black%20Ops%204.jpg',
+        'https://static-cdn.jtvnw.net/ttv-boxart/Call%20of%20Duty%3A%20Black%20Ops%204-600x826.jpg',
       msrp: 5999,
       currentPrice: 4499,
       console: 'playstation',
@@ -129,7 +130,7 @@ async function seed() {
     Product.create({
       name: 'Shadow of the Tomb Raider',
       imageUrl:
-        'https://static-cdn.jtvnw.net/ttv-boxart/Shadow%20of%20the%20Tomb%20Raider.jpg',
+        'https://static-cdn.jtvnw.net/ttv-boxart/Shadow%20of%20the%20Tomb%20Raider-600x826.jpg',
       msrp: 5999,
       currentPrice: 3499,
       console: 'playstation',
