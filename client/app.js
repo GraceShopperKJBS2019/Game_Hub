@@ -25,7 +25,7 @@ class App extends Component {
   }
 
   render() {
-    this.props.user.id && this.props.getCart(this.props.user.id)
+    this.props.getCart(this.props.user.id)
     this.props.user.id && this.props.getOrders(this.props.user.id)
     return (
       <div

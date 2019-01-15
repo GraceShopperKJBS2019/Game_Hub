@@ -19,6 +19,7 @@ const priceHelper = price => {
 }
 
 const CartModal = props => {
+  console.log('props.cart:', props.cart)
   const {cart} = props
   // let pricesArr = cart.map(elem => {
   //   return elem.currentPrice
@@ -36,7 +37,7 @@ const CartModal = props => {
       <Modal.Content>
         <Item.Group divided>
           {cart.map(cartItem => {
-            const {product} = cartItem
+            const product = cartItem
             total += product.currentPrice
             if (product.inventory && product.currentPrice === product.msrp) {
               return (
