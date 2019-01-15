@@ -13,6 +13,12 @@ const OrderHistory = db.define('orderHistory', {
   checkoutPrice: {
     type: Sequelize.INTEGER,
     allowNull: false
+  },
+  email: {
+    type: Sequelize.STRING
+  },
+  address: {
+    type: Sequelize.STRING
   }
 })
 

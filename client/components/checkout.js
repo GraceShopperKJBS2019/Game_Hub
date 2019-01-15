@@ -1,5 +1,4 @@
 import React from 'react'
-import {finishOrder} from '../store/cart'
 import {
   Button,
   Modal,
@@ -12,7 +11,8 @@ import {
   Sidebar
 } from 'semantic-ui-react'
 import {connect} from 'react-redux'
-import {postOrder} from '../store/orderHistory'
+import {finishOrder, finishOrderGuest} from '../store/cart'
+import {postOrder, postGuestOrder} from '../store/orderHistory'
 
 class CheckoutModal extends React.Component {
   constructor() {
@@ -26,10 +26,12 @@ class CheckoutModal extends React.Component {
       address: '',
       city: '',
       state: '',
-      zipcode: ''
+      zipcode: '',
+      email: ''
     }
     this.handleClick = this.handleClick.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleChangePayment = this.handleChangePayment.bind(this)
     this.closeModal = this.closeModal.bind(this)
   }
 
@@ -37,12 +39,29 @@ class CheckoutModal extends React.Component {
     this.setState({visible: true})
   }
 
-  handleSubmit(event, userId) {
+  handleSubmit(event, user) {
     // console.log('USERID SUBMIT', userId)
-    this.props.postOrder(userId, this.props.cart)
-    this.props.finishOrder(userId)
+    const {address, city, state, zipcode} = this.state
+    const addressInfo = `${address}, ${city}, ${state} ${zipcode}`
+
+    if (!this.props.user.hasOwnProperty('id')) {
+      this.props.postGuestOrder(addressInfo, this.state.email, this.props.cart)
+      this.props.finishOrderGuest()
+    } else {
+      this.props.postOrder(addressInfo, user, this.props.cart)
+      this.props.finishOrder(user)
+    }
     event.preventDefault()
     this.closeModal()
+  }
+
+  handleChangePayment(event) {
+    const target = event.target
+    const value = target.value
+    const name = target.name
+    this.setState({
+      [name]: value
+    })
   }
 
   closeModal() {
@@ -51,7 +70,7 @@ class CheckoutModal extends React.Component {
   render() {
     const {visible, showModal} = this.state
     const {user} = this.props
-    console.log('!!!!!props in checkout!!!!!', this.props)
+    // console.log('!!!!!props in checkout!!!!!', this.props)
     return (
       <Modal
         onClose={this.closeModal}
@@ -87,7 +106,7 @@ class CheckoutModal extends React.Component {
                     <label>Card Code</label>
                     <input placeholder="CardCode" />
                   </Form.Field>
-                  <Button onClick={event => this.handleSubmit(event, user.id)}>
+                  <Button onClick={event => this.handleSubmit(event, user)}>
                     Submit
                   </Button>
                 </Form>
@@ -95,25 +114,53 @@ class CheckoutModal extends React.Component {
             </Sidebar>
             <Sidebar.Pusher>
               <Form>
+                <Form.Field width="four">
+                  <label>Email</label>
+                  <input
+                    placeholder="Enter Email"
+                    onChange={this.handleChangePayment}
+                    name="email"
+                  />
+                </Form.Field>
                 <Form.Field width="two">
                   <label>Name</label>
-                  <input placeholder="Enter name" />
+                  <input
+                    placeholder="Enter name"
+                    onChange={this.handleChangePayment}
+                    name="name"
+                  />
                 </Form.Field>
                 <Form.Field width="three">
                   <label>Street Address</label>
-                  <input placeholder="Enter address" />
+                  <input
+                    placeholder="Enter address"
+                    onChange={this.handleChangePayment}
+                    name="address"
+                  />
                 </Form.Field>
                 <Form.Field width="two">
                   <label>City</label>
-                  <input placeholder="Enter city" />
+                  <input
+                    placeholder="Enter city"
+                    onChange={this.handleChangePayment}
+                    name="city"
+                  />
                 </Form.Field>
                 <Form.Field width="1">
                   <label>State</label>
-                  <input />
+                  <input
+                    placeholder="Enter State"
+                    onChange={this.handleChangePayment}
+                    name="state"
+                  />
                 </Form.Field>
                 <Form.Field width="2">
                   <label>Zipcode</label>
-                  <input />
+                  <input
+                    placeholder="Enter Zipcode"
+                    onChange={this.handleChangePayment}
+                    name="zipcode"
+                  />
                 </Form.Field>
               </Form>
               <Button color="blue" onClick={this.handleClick}>
@@ -139,6 +186,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   finishOrder: userId => dispatch(finishOrder(userId)),
-  postOrder: (userId, cart) => dispatch(postOrder(userId, cart))
+  finishOrderGuest: () => dispatch(finishOrderGuest()),
+  postOrder: (address, userId, cart) =>
+    dispatch(postOrder(address, userId, cart)),
+  postGuestOrder: (address, email, cart) =>
+    dispatch(postGuestOrder(address, email, cart))
 })
 export default connect(mapStateToProps, mapDispatchToProps)(CheckoutModal)

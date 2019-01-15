@@ -114,15 +114,22 @@ export const deleteFromCartThunk = (cartId, idx, loggedIn) => {
   }
 }
 
-export const finishOrder = userId => {
+export const finishOrder = user => {
   return async dispatch => {
     try {
       //axios post to order histories here
-      await axios.delete(`/api/users/${userId}/cart`)
+      await axios.delete(`/api/users/${user.id}/cart`)
       dispatch(finishedOrder())
     } catch (error) {
       console.log(error)
     }
+  }
+}
+export const finishOrderGuest = () => {
+  return dispatch => {
+    // clear local storage
+    window.localStorage.clear()
+    dispatch(finishedOrder())
   }
 }
 
