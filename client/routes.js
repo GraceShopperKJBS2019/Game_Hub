@@ -17,7 +17,7 @@ class Routes extends Component {
     const {isLoggedIn} = this.props
 
     return (
-      <Grid inline>
+      <Grid>
         <Switch>
           {/* Routes placed here are available to all visitors */}
           <Route path="/login" component={Login} />

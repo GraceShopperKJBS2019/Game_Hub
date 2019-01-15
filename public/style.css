@@ -73,3 +73,14 @@ form div {
 .fa-arrow-left:before {
   color: #222;
 }
+
+.hero-text {
+  text-align: center;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 35px;
+}
