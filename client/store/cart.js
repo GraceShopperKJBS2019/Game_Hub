@@ -77,16 +77,12 @@ export const cartAdder = (id, productToAdd) => {
       } else {
         const action = addToCart({...productToAdd, product: productToAdd})
         if (window.localStorage.getItem('cart')) {
-          console.log(productToAdd)
-          console.log('window.localStorage:', window.localStorage)
           let newCart = JSON.parse(window.localStorage.getItem('cart'))
           newCart.push(productToAdd)
           window.localStorage.clear()
           window.localStorage.setItem('cart', JSON.stringify(newCart))
-          console.log('newCart:', newCart)
         } else {
           let cart = [productToAdd]
-          console.log('window.localStorage:', window.localStorage)
           window.localStorage.setItem('cart', JSON.stringify(cart))
         }
         dispatch(action)
@@ -97,10 +93,10 @@ export const cartAdder = (id, productToAdd) => {
   }
 }
 
-export const deleteFromCartThunk = (cartId, idx) => {
+export const deleteFromCartThunk = (cartId, idx, loggedIn) => {
   return async dispatch => {
     try {
-      if (idx || idx === 0) {
+      if (!loggedIn) {
         let newCart = JSON.parse(window.localStorage.getItem('cart'))
         newCart.splice(idx, 1)
         window.localStorage.clear()
@@ -139,7 +135,6 @@ export default function(state = defaultCart, action) {
     case ADD_TO_CART:
       return [...state, action.productToAdd]
     case FINISH_ORDER:
-      console.log(action)
       return action.emptycart
     case DELETE_FROM_CART:
       return state.filter(item => item.id !== action.cartItem.id)
