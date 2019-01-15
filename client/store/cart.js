@@ -42,9 +42,16 @@ const deleteFromCart = cartItem => {
 export const getCart = id => {
   return async dispatch => {
     try {
-      let userCart = await axios.get(`/api/users/${id}/cart`)
-      const action = gotCart(userCart.data)
-      dispatch(action)
+      if (id) {
+        let userCart = await axios.get(`/api/users/${id}/cart`)
+        const action = gotCart(userCart.data)
+        dispatch(action)
+      } else {
+        let newCart = JSON.parse(window.localStorage.getItem('cart'))
+        console.log('newCart:', newCart)
+        const action = gotCart(newCart)
+        dispatch(action)
+      }
     } catch (error) {
       console.log(error)
     }
@@ -53,12 +60,30 @@ export const getCart = id => {
 export const cartAdder = (id, productToAdd) => {
   return async dispatch => {
     try {
-      const productAdded = await axios.post(
-        `/api/users/${id}/cart`,
-        productToAdd
-      )
-      const action = addToCart({...productAdded.data, product: productToAdd})
-      dispatch(action)
+      if (id) {
+        const productAdded = await axios.post(
+          `/api/users/${id}/cart`,
+          productToAdd
+        )
+        const action = addToCart({...productAdded, product: productToAdd})
+        dispatch(action)
+      } else {
+        const action = addToCart({...productToAdd, product: productToAdd})
+        if (window.localStorage.getItem('cart')) {
+          console.log(productToAdd)
+          console.log('window.localStorage:', window.localStorage)
+          let newCart = JSON.parse(window.localStorage.getItem('cart'))
+          newCart.push(productToAdd)
+          window.localStorage.clear()
+          window.localStorage.setItem('cart', JSON.stringify(newCart))
+          console.log('newCart:', newCart)
+        } else {
+          let cart = [productToAdd]
+          console.log('window.localStorage:', window.localStorage)
+          window.localStorage.setItem('cart', JSON.stringify(cart))
+        }
+        dispatch(action)
+      }
     } catch (error) {
       console.log(error)
     }
