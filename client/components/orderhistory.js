@@ -22,7 +22,11 @@ const orderList = props => {
                 <Item.Content verticalAlign="middle">
                   <Item.Header>{orders.productName}</Item.Header>
                   <Item.Meta>
-                    <span>{priceHelper(orders.checkoutPrice)}</span>
+                    <div>
+                      <span>{priceHelper(orders.checkoutPrice)}</span>
+                    </div>
+                    <span>{orders.createdAt.slice(0, 10)}</span>
+                    <div> Shipped to: {orders.address} </div>
                   </Item.Meta>
                 </Item.Content>
               </Item>
