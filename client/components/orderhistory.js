@@ -8,7 +8,6 @@ const priceHelper = price => {
 }
 
 const orderList = props => {
-  console.log(props)
   const {orderHistory} = props
   return (
     <div>

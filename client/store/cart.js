@@ -52,11 +52,9 @@ export const getCart = id => {
       if (id) {
         let userCart = await axios.get(`/api/users/${id}/cart`)
         const action = gotCart(userCart.data)
-        console.log('userCart.data:', userCart.data)
         dispatch(action)
       } else {
         let newCart = JSON.parse(window.localStorage.getItem('cart'))
-        console.log('newCart:', newCart)
         const action = gotCart(newCart)
         dispatch(action)
       }
@@ -69,16 +67,13 @@ export const cartAdder = (id, productToAdd) => {
   return async dispatch => {
     try {
       if (id) {
-        console.log('productToAdd 1:', productToAdd)
         const productAdded = await axios.post(
           `/api/users/${id}/cart`,
           productToAdd
         )
-        console.log('productAdded:', productAdded)
         const action = addToCart({...productAdded.data, product: productToAdd})
         dispatch(action)
       } else if (window.localStorage.getItem('cart')) {
-        console.log('79: storage:' + window.localStorage)
         let newCart = JSON.parse(window.localStorage.getItem('cart'))
         newCart.push(productToAdd)
         window.localStorage.clear()
@@ -86,7 +81,6 @@ export const cartAdder = (id, productToAdd) => {
         const action = addToCart({...productToAdd, product: productToAdd})
         dispatch(action)
       } else {
-        console.log('87: window: ' + window.localStorage)
         let cart = [productToAdd]
         window.localStorage.setItem('cart', JSON.stringify(cart))
         const action = addToCart({...productToAdd, product: productToAdd})
