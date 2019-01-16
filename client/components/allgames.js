@@ -5,7 +5,7 @@ import {Card, Image, Grid, Button, Icon} from 'semantic-ui-react'
 import {cartAdder} from '../store/cart'
 import AddToCartButton from './addToCartButton'
 
-const AllGames = props => {
+export const AllGames = props => {
   return (
     <Grid container columns={5} doubling>
       {props.products.map(product => {
@@ -53,4 +53,7 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AllGames)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AllGames)
