@@ -28,7 +28,7 @@ export const me = () => async dispatch => {
   try {
     const res = await axios.get('/auth/me')
     dispatch(getUser(res.data || defaultUser))
-    if (window.localStorage.getItem('cart')) {
+    if (window.localStorage.getItem('cart') && res.data.id) {
       const oldCart = JSON.parse(window.localStorage.getItem('cart'))
       oldCart.forEach(product => {
         dispatch(cartAdder(res.data.id, product))

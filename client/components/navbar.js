@@ -53,7 +53,9 @@ const Navbar = props => (
     <Menu.Item as={Link} to="/products/newreleases">
       New Releases
     </Menu.Item>
-    <Menu.Item>Sale</Menu.Item>
+    <Menu.Item as={Link} to="/products/sales">
+      Sale
+    </Menu.Item>
     <Menu.Item>
       <Routes />
     </Menu.Item>
