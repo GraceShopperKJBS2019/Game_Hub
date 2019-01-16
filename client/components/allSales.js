@@ -5,14 +5,14 @@ import {Card, Image, Grid, Button, Icon} from 'semantic-ui-react'
 import {cartAdder} from '../store/cart'
 import AddToCartButton from './addToCartButton'
 
-const NewReleases = props => {
+const AllSales = props => {
   const today = new Date()
   const dateFilter = new Date().setDate(today.getDate() - 30)
 
   return (
     <Grid container columns={5} doubling>
       {props.products
-        .filter(product => new Date(product.releaseDate) > dateFilter)
+        .filter(product => product.msrp !== product.currentPrice)
         .map(product => {
           return (
             <Grid.Column key={product.id}>
@@ -58,4 +58,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewReleases)
+export default connect(mapStateToProps, mapDispatchToProps)(AllSales)
