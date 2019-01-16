@@ -2,10 +2,10 @@ import axios from 'axios'
 import history from '../history'
 
 //action types
-const GET_PRODUCTS = 'GET_PRODUCTS'
+export const GET_PRODUCTS = 'GET_PRODUCTS'
 
 //action creators
-const getProducts = products => ({type: GET_PRODUCTS, products})
+export const getProducts = products => ({type: GET_PRODUCTS, products})
 
 //THUNK CREATORS
 
