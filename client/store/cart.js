@@ -52,6 +52,7 @@ export const getCart = id => {
       if (id) {
         let userCart = await axios.get(`/api/users/${id}/cart`)
         const action = gotCart(userCart.data)
+        console.log('userCart.data:', userCart.data)
         dispatch(action)
       } else {
         let newCart = JSON.parse(window.localStorage.getItem('cart'))
@@ -68,23 +69,27 @@ export const cartAdder = (id, productToAdd) => {
   return async dispatch => {
     try {
       if (id) {
+        console.log('productToAdd 1:', productToAdd)
         const productAdded = await axios.post(
           `/api/users/${id}/cart`,
           productToAdd
         )
+        console.log('productAdded:', productAdded)
         const action = addToCart({...productAdded.data, product: productToAdd})
         dispatch(action)
-      } else {
+      } else if (window.localStorage.getItem('cart')) {
+        console.log('79: storage:' + window.localStorage)
+        let newCart = JSON.parse(window.localStorage.getItem('cart'))
+        newCart.push(productToAdd)
+        window.localStorage.clear()
+        window.localStorage.setItem('cart', JSON.stringify(newCart))
         const action = addToCart({...productToAdd, product: productToAdd})
-        if (window.localStorage.getItem('cart')) {
-          let newCart = JSON.parse(window.localStorage.getItem('cart'))
-          newCart.push(productToAdd)
-          window.localStorage.clear()
-          window.localStorage.setItem('cart', JSON.stringify(newCart))
-        } else {
-          let cart = [productToAdd]
-          window.localStorage.setItem('cart', JSON.stringify(cart))
-        }
+        dispatch(action)
+      } else {
+        console.log('87: window: ' + window.localStorage)
+        let cart = [productToAdd]
+        window.localStorage.setItem('cart', JSON.stringify(cart))
+        const action = addToCart({...productToAdd, product: productToAdd})
         dispatch(action)
       }
     } catch (error) {
@@ -140,7 +145,11 @@ export default function(state = defaultCart, action) {
     case GOT_CART:
       return action.userCart
     case ADD_TO_CART:
-      return [...state, action.productToAdd]
+      if (state) {
+        return [...state, action.productToAdd]
+      } else {
+        return [action.productToAdd]
+      }
     case FINISH_ORDER:
       return action.emptycart
     case DELETE_FROM_CART:
