@@ -1,5 +1,6 @@
 import axios from 'axios'
 import history from '../history'
+import {cartAdder} from './cart'
 
 /**
  * ACTION TYPES
@@ -15,7 +16,9 @@ const defaultUser = {}
 /**
  * ACTION CREATORS
  */
-const getUser = user => ({type: GET_USER, user})
+const getUser = user => {
+  return {type: GET_USER, user}
+}
 const removeUser = () => ({type: REMOVE_USER})
 
 /**
@@ -25,6 +28,13 @@ export const me = () => async dispatch => {
   try {
     const res = await axios.get('/auth/me')
     dispatch(getUser(res.data || defaultUser))
+    if (window.localStorage.getItem('cart')) {
+      const oldCart = JSON.parse(window.localStorage.getItem('cart'))
+      oldCart.forEach(product => {
+        dispatch(cartAdder(res.data.id, product))
+      })
+      window.localStorage.clear()
+    }
   } catch (err) {
     console.error(err)
   }
