@@ -13,7 +13,7 @@ import {
   injectStripe
 } from 'react-stripe-elements'
 
-import {CardForm} from './checkoutFormStripe'
+import {CardForm} from './stripeForm'
 
 class Checkout extends React.Component {
   constructor() {
