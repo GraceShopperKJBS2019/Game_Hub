@@ -39,6 +39,8 @@ const CartModal = props => {
           {cart.map((cartItem, idx) => {
             const product = userId ? cartItem.product : cartItem
             if (product) {
+              console.log('cartItem:', cartItem)
+
               total += product.currentPrice
               if (product.inventory && product.currentPrice === product.msrp) {
                 return (

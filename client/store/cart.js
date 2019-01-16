@@ -72,7 +72,7 @@ export const cartAdder = (id, productToAdd) => {
           `/api/users/${id}/cart`,
           productToAdd
         )
-        const action = addToCart({...productAdded, product: productToAdd})
+        const action = addToCart({...productAdded.data, product: productToAdd})
         dispatch(action)
       } else {
         const action = addToCart({...productToAdd, product: productToAdd})
