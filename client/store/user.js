@@ -1,6 +1,6 @@
 import axios from 'axios'
 import history from '../history'
-import {cartAdder} from './cart'
+import {cartAdder, getCart} from './cart'
 
 /**
  * ACTION TYPES
@@ -33,6 +33,7 @@ export const me = () => async dispatch => {
       oldCart.forEach(product => {
         dispatch(cartAdder(res.data.id, product))
       })
+      dispatch(getCart(res.data.id))
       window.localStorage.clear()
     }
   } catch (err) {
@@ -51,6 +52,7 @@ export const auth = (
   try {
     if (method === 'login') {
       res = await axios.post(`/auth/${method}`, {email, password})
+      dispatch(me())
     }
     if (method === 'signup') {
       res = await axios.post(`/auth/${method}`, {
@@ -59,6 +61,7 @@ export const auth = (
         firstName,
         lastName
       })
+      dispatch(me())
     }
   } catch (authError) {
     return dispatch(getUser({error: authError}))
