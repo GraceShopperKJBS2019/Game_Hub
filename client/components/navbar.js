@@ -17,102 +17,106 @@ import CartModal from './cart'
 import Routes from '../routes'
 import SearchBar from './searchBar'
 
-const resultRenderer = ({name, imageUrl, currentPrice, id}) => (
-  <Label href="/products/">
-    <img src={imageUrl} />
-    {name}{' '}
-    {'$' +
-      currentPrice.toString().slice(0, -2) +
-      '.' +
-      currentPrice.toString().slice(-2)}
-  </Label>
-)
+const Navbar = props => {
+  const resultRenderer = ({name, imageUrl, currentPrice, id}) => {
+    let product = props.products.find(product => product.name === name)
+    return (
+      <Label href={'/products/' + product.id}>
+        <img src={imageUrl} />
+        {name}{' '}
+        {'$' +
+          currentPrice.toString().slice(0, -2) +
+          '.' +
+          currentPrice.toString().slice(-2)}
+      </Label>
+    )
+  }
 
-const Navbar = props => (
-  <Menu inverted color="black">
-    <Menu.Item as={Link} to="/">
-      <Image
-        circular
-        size="tiny"
-        centered
-        src="http://game-hub2019.herokuapp.com/icon.png"
-      />
-    </Menu.Item>
-    <Menu.Item>
-      <Dropdown className="inverted" text="Platforms" button>
-        <Dropdown.Menu>
-          <Dropdown.Item as={Link} to="/products">
-            All platforms
-          </Dropdown.Item>
-          <Dropdown.Item
-            as={Link}
-            to="/products/pc"
-            icon="computer"
-            text="PC"
-          />
-          <Dropdown.Item
-            as={Link}
-            to="/products/xbox"
-            icon="xbox"
-            text="Xbox"
-          />
-          <Dropdown.Item
-            as={Link}
-            to="/products/playstation"
-            icon="playstation"
-            text="Playstation"
-          />
-          <Dropdown.Item
-            as={Link}
-            to="/products/switch"
-            icon="nintendo switch"
-            text="Switch"
-          />
-        </Dropdown.Menu>
-      </Dropdown>
-    </Menu.Item>
-    <Menu.Item as={Link} to="/products/newreleases">
-      New Releases
-    </Menu.Item>
-    <Menu.Item as={Link} to="/products/sales">
-      Sale
-    </Menu.Item>
-    <Menu.Item position="right">
-      <Routes />
-    </Menu.Item>
-    <Menu.Item fitted>
-      <SearchBar resultRenderer={resultRenderer} />
-
-    </Menu.Item>
-    <Menu.Item>
-      <CartModal />
-    </Menu.Item>
-    {props.isLoggedIn && (
-      <Menu.Item>
-        <Button inverted onClick={props.handleClick}>
-          Logout
-        </Button>
+  return (
+    <Menu inverted color="black">
+      <Menu.Item as={Link} to="/">
+        <Image
+          circular
+          size="tiny"
+          centered
+          src="http://game-hub2019.herokuapp.com/icon.png"
+        />
       </Menu.Item>
-    )}
-    {props.isLoggedIn && (
       <Menu.Item>
-        <Dropdown button icon="user">
+        <Dropdown className="inverted" text="Platforms" button>
           <Dropdown.Menu>
-            <Dropdown.Item as={Link} to="/orders" text="Past Orders" />
+            <Dropdown.Item as={Link} to="/products">
+              All platforms
+            </Dropdown.Item>
+            <Dropdown.Item
+              as={Link}
+              to="/products/pc"
+              icon="computer"
+              text="PC"
+            />
+            <Dropdown.Item
+              as={Link}
+              to="/products/xbox"
+              icon="xbox"
+              text="Xbox"
+            />
+            <Dropdown.Item
+              as={Link}
+              to="/products/playstation"
+              icon="playstation"
+              text="Playstation"
+            />
+            <Dropdown.Item
+              as={Link}
+              to="/products/switch"
+              icon="nintendo switch"
+              text="Switch"
+            />
           </Dropdown.Menu>
         </Dropdown>
       </Menu.Item>
-    )}
-  </Menu>
-)
-
+      <Menu.Item as={Link} to="/products/newreleases">
+        New Releases
+      </Menu.Item>
+      <Menu.Item as={Link} to="/products/sales">
+        Sale
+      </Menu.Item>
+      <Menu.Item position="right">
+        <Routes />
+      </Menu.Item>
+      <Menu.Item fitted>
+        <SearchBar resultRenderer={resultRenderer} />
+      </Menu.Item>
+      <Menu.Item>
+        <CartModal />
+      </Menu.Item>
+      {props.isLoggedIn && (
+        <Menu.Item>
+          <Button inverted onClick={props.handleClick}>
+            Logout
+          </Button>
+        </Menu.Item>
+      )}
+      {props.isLoggedIn && (
+        <Menu.Item>
+          <Dropdown button icon="user">
+            <Dropdown.Menu>
+              <Dropdown.Item as={Link} to="/orders" text="Past Orders" />
+            </Dropdown.Menu>
+          </Dropdown>
+        </Menu.Item>
+      )}
+    </Menu>
+  )
+}
 /**
  * CONTAINER
  */
 const mapState = state => {
   return {
     isLoggedIn: !!state.user.id,
-    user: state.user
+    user: state.user,
+    products: state.products
   }
 }
 
