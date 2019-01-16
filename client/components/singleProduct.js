@@ -36,16 +36,6 @@ class singleProduct extends Component {
               </Item.Header>
 
               <Item.Description>{singleProduct.description}</Item.Description>
-              {/* <Item.Description>{singleProduct.console}</Item.Description> */}
-
-              {/* <Dropdown
-                placeholder="console"
-                search
-                selection
-                options={consoles}
-                value={this.props.console}
-                onChange={this.onChangeDropdown.bind(this)}
-              /> */}
 
               <Item.Meta>
                 {singleProduct.currentPrice === singleProduct.msrp ? (

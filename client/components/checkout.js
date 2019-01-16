@@ -40,7 +40,6 @@ class CheckoutModal extends React.Component {
   }
 
   handleSubmit(event, user) {
-    // console.log('USERID SUBMIT', userId)
     const {address, city, state, zipcode} = this.state
     const addressInfo = `${address}, ${city}, ${state} ${zipcode}`
 
@@ -70,7 +69,6 @@ class CheckoutModal extends React.Component {
   render() {
     const {visible, showModal} = this.state
     const {user} = this.props
-    // console.log('!!!!!props in checkout!!!!!', this.props)
     return (
       <Modal
         onClose={this.closeModal}

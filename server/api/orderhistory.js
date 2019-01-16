@@ -40,7 +40,6 @@ router.get('/:userId', async (req, res, next) => {
 })
 
 router.post('/guestCheckout', async (req, res, next) => {
-  // console.log(req.body);
   try {
     const toCreate = await Promise.all(
       req.body.cart.map(elem => {
