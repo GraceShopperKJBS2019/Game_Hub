@@ -20,6 +20,7 @@ import {getCart} from './store/cart'
 import {getOrders} from './store/orderHistory'
 import Landing from './components/hero'
 import {Sticky} from 'semantic-ui-react'
+import 'react-toastify/dist/ReactToastify.css'
 
 class App extends Component {
   componentDidMount() {
