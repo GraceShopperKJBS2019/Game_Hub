@@ -3,9 +3,30 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
-import {Menu, Image, Dropdown, Icon, Search, Button} from 'semantic-ui-react'
+import {
+  Menu,
+  Image,
+  Dropdown,
+  Icon,
+  Search,
+  Button,
+  Label,
+  Item
+} from 'semantic-ui-react'
 import CartModal from './cart'
 import Routes from '../routes'
+import SearchBar from './searchBar'
+
+const resultRenderer = ({name, imageUrl, currentPrice, id}) => (
+  <Label href="/products/">
+    <img src={imageUrl} />
+    {name}{' '}
+    {'$' +
+      currentPrice.toString().slice(0, -2) +
+      '.' +
+      currentPrice.toString().slice(-2)}
+  </Label>
+)
 
 const Navbar = props => (
   <Menu inverted color="black">
@@ -60,7 +81,8 @@ const Navbar = props => (
       <Routes />
     </Menu.Item>
     <Menu.Item fitted>
-      <Search />
+      <SearchBar resultRenderer={resultRenderer} />
+
     </Menu.Item>
     <Menu.Item>
       <CartModal />
