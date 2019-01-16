@@ -56,10 +56,10 @@ const Navbar = props => (
     <Menu.Item as={Link} to="/products/sales">
       Sale
     </Menu.Item>
-    <Menu.Item>
+    <Menu.Item position="right">
       <Routes />
     </Menu.Item>
-    <Menu.Item position="right" fitted>
+    <Menu.Item fitted>
       <Search />
     </Menu.Item>
     <Menu.Item>

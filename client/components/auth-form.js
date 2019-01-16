@@ -2,7 +2,15 @@ import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {auth} from '../store'
-import {Form, Container, Button, Modal} from 'semantic-ui-react'
+import {
+  Form,
+  Container,
+  Button,
+  Modal,
+  Segment,
+  Grid,
+  Divider
+} from 'semantic-ui-react'
 import {GoogleLogin} from 'react-google-login'
 
 /**
@@ -13,52 +21,75 @@ const responseGoogle = response => {
 }
 
 const AuthForm = props => {
-  const {name, displayName, handleSubmit, error} = props
+  const {displayName, handleSubmit, error} = props
 
   return (
-    <Modal trigger={<Button inverted>Login</Button>}>
+    <Modal trigger={<Button inverted>Login | Signup</Button>}>
       <Modal.Content>
-        <Container>
-          <Form unstackable onSubmit={handleSubmit} name={name}>
-            <Form.Group inline>
-              <Form.Input name="email" placeholder="email" type="text" />
-              <Form.Input
-                name="password"
-                placeholder="password"
-                type="password"
-              />
-              {name === 'signup' && (
+        <Segment placeholder>
+          <Grid columns={2} relaxed="very" stackable verticalAlign="middle">
+            <Grid.Column>
+              <Form unstackable onSubmit={handleSubmit} name="login">
+                <Form.Input
+                  name="email"
+                  label="email"
+                  placeholder="email"
+                  type="text"
+                />
+                <Form.Input
+                  name="password"
+                  label="password"
+                  placeholder="password"
+                  type="password"
+                />
+                <Form.Button content="Login" primary type="submit" />
+                <GoogleLogin
+                  clientId="116286742111-55fq55eqqfkfj122hit40rn9k7hkdlav.apps.googleusercontent.com"
+                  buttonText="Login"
+                  onSuccess={responseGoogle}
+                  onFailure={responseGoogle}
+                />
+              </Form>
+            </Grid.Column>
+            <Grid.Column stretched>
+              <Form unstackable onSubmit={handleSubmit} name="signup">
+                <Form.Input
+                  name="email"
+                  label="email"
+                  placeholder="email"
+                  type="text"
+                />
+                <Form.Input
+                  name="password"
+                  label="password"
+                  placeholder="password"
+                  type="password"
+                />
                 <Form.Input
                   label="firstName"
                   name="firstName"
                   placeholder="firstName"
                   type="string"
                 />
-              )}
-              {name === 'signup' && (
+
                 <Form.Input
                   label="lastName"
                   name="lastName"
                   placeholder="lastName"
                   type="string"
                 />
-              )}
-              <Form.Button type="submit">{displayName}</Form.Button>
-              {error && error.response && <div> {error.response.data} </div>}
-              <GoogleLogin
-                clientId="116286742111-55fq55eqqfkfj122hit40rn9k7hkdlav.apps.googleusercontent.com"
-                buttonText="Login"
-                onSuccess={responseGoogle}
-                onFailure={responseGoogle}
-              />
-            </Form.Group>
-          </Form>
-        </Container>
+
+                <Form.Button content="Signup" primary type="submit" />
+              </Form>
+            </Grid.Column>
+            {error && error.response && <div> {error.response.data} </div>}
+          </Grid>
+          <Divider vertical>Or</Divider>
+        </Segment>
       </Modal.Content>
     </Modal>
   )
 }
-
 /**
  * CONTAINER
  *   Note that we have two different sets of 'mapStateToProps' functions -
