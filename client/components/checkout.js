@@ -13,6 +13,7 @@ import {
 import {connect} from 'react-redux'
 import {finishOrder, finishOrderGuest} from '../store/cart'
 import {postOrder, postGuestOrder} from '../store/orderHistory'
+import Stripe from './stripeCheckout'
 
 class CheckoutModal extends React.Component {
   constructor() {
@@ -93,23 +94,7 @@ class CheckoutModal extends React.Component {
               width="very wide"
             >
               <Segment color="black">
-                <Form>
-                  <Form.Field width="three">
-                    <label>Card #</label>
-                    <input placeholder="Credit Card" />
-                  </Form.Field>
-                  <Form.Field width="three">
-                    <label>Expiration Date</label>
-                    <input placeholder="Date" />
-                  </Form.Field>
-                  <Form.Field width="two">
-                    <label>Card Code</label>
-                    <input placeholder="CardCode" />
-                  </Form.Field>
-                  <Button onClick={event => this.handleSubmit(event, user)}>
-                    Submit
-                  </Button>
-                </Form>
+                <Stripe />
               </Segment>
             </Sidebar>
             <Sidebar.Pusher>
