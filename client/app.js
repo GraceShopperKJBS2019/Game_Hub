@@ -10,7 +10,8 @@ import {
   AllSwitchGames,
   Footer,
   orderList,
-  NewReleases
+  NewReleases,
+  AllSales
 } from './components'
 import {Navlink, Switch, Route, withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
@@ -44,6 +45,7 @@ class App extends Component {
             <Route path="/products/pc" component={AllPcGames} />
             <Route path="/products/playstation" component={AllPlaystayGames} />
             <Route path="/products/switch" component={AllSwitchGames} />
+            <Route path="/products/sales" component={AllSales} />
             <Route path="/products/:id" component={singleProduct} />
             <Route path="/orders" component={orderList} />
           </Switch>
