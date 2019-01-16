@@ -4,7 +4,6 @@ import axios from 'axios'
 import {Image, Item, Dropdown, Button, Icon} from 'semantic-ui-react'
 import {Review} from './reviews'
 import {game} from '../store/singleProduct'
-import {setConsole} from '../store/currConsole'
 import AddToCartButton from './addToCartButton'
 
 const priceHelper = price => {
