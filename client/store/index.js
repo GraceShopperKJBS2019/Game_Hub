@@ -6,14 +6,14 @@ import user from './user'
 import products from './products'
 import cart from './cart'
 import singleProduct from './singleProduct'
-import currConsole from './currConsole'
+// import currConsole from './currConsole'
 import orderHistory from './orderHistory'
 
 const reducer = combineReducers({
   user,
   products,
   singleProduct,
-  currConsole,
+  // currConsole,
   cart,
   orderHistory
 })

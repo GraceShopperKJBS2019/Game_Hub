@@ -23,18 +23,7 @@ class singleProduct extends Component {
 
   render() {
     const {singleProduct} = this.props
-    console.log(singleProduct)
-    const consoles = [
-      {key: 'PC', text: 'PC', value: 'PC'},
-      {key: 'SW', text: 'Switch', value: 'Switch'},
-      {key: 'XB', text: 'Xbox', value: 'Xbox'},
-      {key: 'PS', text: 'Playstation', value: 'Playstation'}
-    ]
-    // const price = singleProduct.currentPrice.toString().slice(0, -2) +'.' +
-    // singleProduct.currentPrice.toString().slice(-2)
-    let price = `$${singleProduct.currentPrice}`
-    price =
-      price.slice(0, price.length - 2) + '.' + price.slice(price.length - 2)
+
     return (
       <div>
         <Item.Group>
@@ -42,18 +31,21 @@ class singleProduct extends Component {
             <Item.Image size="medium" src={singleProduct.imageUrl} rounded />
 
             <Item.Content>
-              <Item.Header>{singleProduct.name}</Item.Header>
+              <Item.Header>
+                {singleProduct.name} for {singleProduct.console}
+              </Item.Header>
 
               <Item.Description>{singleProduct.description}</Item.Description>
+              {/* <Item.Description>{singleProduct.console}</Item.Description> */}
 
-              <Dropdown
+              {/* <Dropdown
                 placeholder="console"
                 search
                 selection
                 options={consoles}
                 value={this.props.console}
                 onChange={this.onChangeDropdown.bind(this)}
-              />
+              /> */}
 
               <Item.Meta>
                 {singleProduct.currentPrice === singleProduct.msrp ? (
