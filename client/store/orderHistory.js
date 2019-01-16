@@ -55,7 +55,6 @@ export const postGuestOrder = (address, email, cart) => {
     email,
     address
   }
-  console.log(toSend)
   return async dispatch => {
     try {
       await axios.post(`/api/orderhistory/guestCheckout`, toSend)

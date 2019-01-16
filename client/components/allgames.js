@@ -47,7 +47,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     addToCart: product => {
-      console.log('product:', product)
       dispatch(cartAdder(product))
     }
   }
